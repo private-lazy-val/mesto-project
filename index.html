@@ -27,7 +27,11 @@
         </h1>
         <!-- Profile -->
         <section class="profile">
-          <img class="avatar" src="./images/avatar.jpg" alt="" />
+          <img
+            class="avatar"
+            src="./images/avatar.jpg"
+            alt="Аватар пользователя."
+          />
           <div class="profile__info">
             <div class="profile__edit-info">
               <h2 class="profile__name">Жак-Ив Кусто</h2>
@@ -37,6 +41,39 @@
           </div>
           <button type="button" class="button button__add"></button>
         </section>
+
+        <!-- Pop-up -->
+        <div class="popup popup_opened">
+          <form class="popup__container">
+            <button class="button button__exit"></button>
+            <h2 class="popup__header">Редактировать профиль</h2>
+            <fieldset class="popup__input-container">
+              <input
+                type="text"
+                class="popup__item popup__item_el_name"
+                name="user-name"
+                minlength="3"
+                maxlength="20"
+                placeholder="Жак-Ив Кусто"
+                required
+              />
+              <input
+                type="text"
+                class="popup__item popup__item_el_occupation"
+                name="user-occupation"
+                minlength="3"
+                maxlength="20"
+                placeholder="Исследователь океана"
+                required
+              />
+            </fieldset>
+            <fieldset class="popup__handlers">
+              <button type="submit" class="button popup__save-button">
+                Сохранить
+              </button>
+            </fieldset>
+          </form>
+        </div>
 
         <!-- Cards -->
         <section class="cards">
@@ -109,10 +146,10 @@
         </section>
       </main>
     </div>
-  </body>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <a class="footer__copyright" href="#">&#169; 2023 Mesto Russia</a>
-  </footer>
+    <!-- Footer -->
+    <footer class="footer">
+      <a class="footer__copyright" href="#">&#169; 2023 Mesto Russia</a>
+    </footer>
+  </body>
 </html>

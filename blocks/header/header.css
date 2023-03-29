@@ -8,7 +8,13 @@
   margin-top: 45px;
 }
 
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 920px) {
+  .header {
+    padding: 0 27px;
+  }
+}
+
+@media only screen and (max-width: 695px) {
   .header {
     min-height: 56px;
     margin-top: 28px;

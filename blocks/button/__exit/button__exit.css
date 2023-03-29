@@ -1,0 +1,19 @@
+.button__exit {
+  background-image: url(./../../../images/close-button.svg);
+  background-color: transparent;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: -40px;
+  right: -40px;
+}
+
+@media only screen and (max-width: 695px) {
+  .button__exit {
+    background-image: url(./../../../images/close-button_mobile.svg);
+    width: 20px;
+    height: 20px;
+    top: -36px;
+    right: 0;
+  }
+}

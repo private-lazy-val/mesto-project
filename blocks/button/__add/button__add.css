@@ -6,7 +6,7 @@
   margin-right: 0;
 }
 
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 695px) {
   .button__add {
     background-image: url(./../../../images/add-button-mobile.svg);
     width: 282px;

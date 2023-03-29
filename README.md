@@ -1,17 +1,49 @@
-# Проект: Место
+# Mesto Project
 
-### Обзор
+This project showcases some of the most beautiful and remarkable places in Russia, created using HTML and CSS. The website design is adaptive and responsive, ensuring that it looks great on various devices and screen sizes. Additionally, a simple dialogue window with a form has been implemented to edit user's name and occupation.
 
-* Figma
-* Картинки
+## Table of Contents
 
-**Figma**
+1. [Overview](#overview)
+   - [Intro](#intro)
+   - [Figma](#figma)
+   - [Images](#images)
+   - [GitHub Pages](#github-pages)
+2. [Technologies](#technologies)
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+## Overview
 
-**Картинки**
+### Intro
 
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
+This project aims to provide an engaging and visually appealing experience for users interested in exploring Russia's stunning landscapes, historical sites, and cultural attractions.
 
-Удачи!
+### Figma
+
+The design prototype for this project was created using Figma. You can view the Figma prototypes at the following link:
+
+- [Figma prototypes](https://www.figma.com/file/xni8mSiI7OqdTyzTD1wQ6L/JavaScript.-Sprint-4?node-id=28212-2&t=x7dkQJZtB5fHShUH-0)
+
+### Images
+
+All images used in this project have been optimized for faster loading and better performance using the [tiny png](https://tinypng.com/) service.
+
+### GitHub Pages
+
+Mesto project is hosted on GitHub Pages. You can view the live site here:
+
+- [https://private-lazy-val.github.io/russian-travel/](https://private-lazy-val.github.io/mesto-project/)
+
+## Technologies
+
+The following technologies were used to develop this project:
+
+- HTML5
+- CSS3
+- Media queries
+- Responsive web design
+- Flexbox
+- Grid
+- Simple forms
+- Git and GitHub
+- Figma
+- Image optimization tools (e.g., tiny png)
