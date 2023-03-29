@@ -8,7 +8,7 @@ This project showcases some of the most beautiful and remarkable places in Russi
    - [Intro](#intro)
    - [Figma](#figma)
    - [Images](#images)
-   - [GitHub Pages](#github-pages)
+   - [Hosting](#hosting)
 2. [Technologies](#technologies)
 
 ## Overview
@@ -27,11 +27,12 @@ The design prototype for this project was created using Figma. You can view the 
 
 All images used in this project have been optimized for faster loading and better performance using the [tiny png](https://tinypng.com/) service.
 
-### GitHub Pages
+### Hosting
 
-Mesto project is hosted on GitHub Pages. You can view the live site here:
+Mesto project is hosted on GitHub Pages and Vercel. You can view the live sites here:
 
 - [https://private-lazy-val.github.io/mesto-project/](https://private-lazy-val.github.io/mesto-project/)
+- [https://private-lazy-val-mesto-project.vercel.app/](https://private-lazy-val-mesto-project.vercel.app/)
 
 ## Technologies
 
