@@ -41,9 +41,7 @@ The following technologies were used to develop this project:
 - CSS3
 - Media queries
 - Responsive web design
-- Flexbox
-- Grid
-- Simple forms
+- Flexbox and Grid
 - Git and GitHub
 - Figma
 - Image optimization tools (e.g., tiny png)
