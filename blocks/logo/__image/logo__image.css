@@ -1,0 +1,10 @@
+.logo__image {
+  max-width: 142px;
+}
+
+@media only screen and (max-width: 320px) {
+  .logo__image {
+    max-width: 104px;
+  }
+}
+

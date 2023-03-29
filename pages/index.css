@@ -1,0 +1,49 @@
+/* Normalize */
+@import url(../vendor/normalize.css);
+
+/* Fonts */
+@import url(../vendor/fonts/fonts.css);
+
+/* Root */
+@import url(../blocks/root/root.css);
+
+/* Page */
+@import url(../blocks/page/page.css);
+
+/* Header */
+@import url(../blocks/header/header.css);
+
+/* Logo */
+@import url(../blocks/logo/logo.css);
+@import url(../blocks/logo/__image/logo__image.css);
+
+/* Visually hidden heading */
+@import url(../blocks/visually-hidden/visually-hidden.css);
+
+/* Avatar */
+@import url(../blocks/avatar/avatar.css);
+
+/* Profile */
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__edit-info/profile__edit-info.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/profile/__occupation/profile__occupation.css);
+
+/* Buttons */
+@import url(../blocks/button/button.css);
+@import url(../blocks/button/__edit/button__edit.css);
+@import url(../blocks/button/__add/button__add.css);
+@import url(../blocks/button/__like/button__like.css);
+@import url(../blocks/button/__like/_active/button__like_active.css);
+
+/* Cards */
+@import url(../blocks/cards/cards.css);
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__container/card__container.css);
+@import url(../blocks/card/__image/card__image.css);
+@import url(../blocks/card/__title/card__title.css);
+
+/* Footer */
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
