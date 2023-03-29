@@ -31,7 +31,7 @@ All images used in this project have been optimized for faster loading and bette
 
 Mesto project is hosted on GitHub Pages. You can view the live site here:
 
-- [https://private-lazy-val.github.io/russian-travel/](https://private-lazy-val.github.io/mesto-project/)
+- [https://private-lazy-val.github.io/mesto-project/](https://private-lazy-val.github.io/mesto-project/)
 
 ## Technologies
 
