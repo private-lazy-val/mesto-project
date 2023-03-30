@@ -31,7 +31,7 @@ All images used in this project have been optimized for faster loading and bette
 
 Mesto project is hosted on GitHub Pages and Vercel. You can view the live sites here:
 
-- [https://private-lazy-val.github.io/mesto-project/](https://private-lazy-val.github.io/mesto-project/) (often doesn't load)
+- [https://private-lazy-val.github.io/mesto-project/](https://private-lazy-val.github.io/mesto-project/)
 - [https://private-lazy-val-mesto-project.vercel.app/](https://private-lazy-val-mesto-project.vercel.app/)
 
 ## Technologies

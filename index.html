@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./pages/index.css" />
-    <link rel="icon" type="image/jpeg" href="./images/forest.svg" />
+    <link rel="icon" type="image/svg+xml" href="./images/favicon.svg" />
     <title>Mesto</title>
   </head>
 
@@ -16,140 +16,138 @@
       <!-- Header -->
       <header class="header">
         <a class="logo" href="#"
-          ><img class="logo__image" src="./images/logo.svg" alt="Mesto Russia."
+          ><img
+            class="logo__image"
+            src="./images/logo.svg"
+            alt="Логотип сайта Место."
         /></a>
       </header>
 
+      <!-- Pop-up -->
+      <div class="popup">
+        <div class="popup__container">
+          <h2 class="popup__header">Редактировать профиль</h2>
+          <button class="button popup__exit-button"></button>
+          <form class="popup__form" name="edit-profile-form">
+            <input
+              type="text"
+              class="popup__input-field popup__input-field_el_name"
+              name="user-name"
+              placeholder="Имя"
+              required
+            />
+            <input
+              type="text"
+              class="popup__input-field popup__input-field_el_occupation"
+              name="user-occupation"
+              placeholder="Описание"
+              required
+            />
+            <button type="submit" class="button popup__save-button">
+              Сохранить
+            </button>
+          </form>
+        </div>
+      </div>
+
       <!-- Main Content -->
       <main class="content">
-        <h1 class="visually-hidden">
-          Путешествие по самым красивым местам России
-        </h1>
         <!-- Profile -->
         <section class="profile">
           <img
-            class="avatar"
+            class="profile__avatar"
             src="./images/avatar.jpg"
             alt="Аватар пользователя."
           />
           <div class="profile__info">
             <div class="profile__edit-info">
-              <h2 class="profile__name">Жак-Ив Кусто</h2>
-              <button type="button" class="button button__edit"></button>
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <button
+                type="button"
+                class="button profile__edit-button"
+              ></button>
             </div>
             <p class="profile__occupation">Исследователь океана</p>
           </div>
-          <button type="button" class="button button__add"></button>
+          <button type="button" class="button profile__add-button"></button>
         </section>
-
-        <!-- Pop-up -->
-        <div class="popup popup_opened">
-          <form class="popup__container">
-            <button class="button button__exit"></button>
-            <h2 class="popup__header">Редактировать профиль</h2>
-            <fieldset class="popup__input-container">
-              <input
-                type="text"
-                class="popup__item popup__item_el_name"
-                name="user-name"
-                minlength="3"
-                maxlength="20"
-                placeholder="Жак-Ив Кусто"
-                required
-              />
-              <input
-                type="text"
-                class="popup__item popup__item_el_occupation"
-                name="user-occupation"
-                minlength="3"
-                maxlength="20"
-                placeholder="Исследователь океана"
-                required
-              />
-            </fieldset>
-            <fieldset class="popup__handlers">
-              <button type="submit" class="button popup__save-button">
-                Сохранить
-              </button>
-            </fieldset>
-          </form>
-        </div>
-
         <!-- Cards -->
         <section class="cards">
-          <div class="card">
+          <article class="card">
             <img
               class="card__image"
               src="./images/karachay-cherkessia.jpg"
               alt="Сентинский храм в Карачаево-Черкесии."
             />
             <div class="card__container">
-              <h3 class="card__title">Карачаево-Черкесс</h3>
-              <button type="button" class="button button__like"></button>
+              <h2 class="card__title">Карачаево-Черкесс</h2>
+              <button
+                type="button"
+                class="button card__like-button_active"
+              ></button>
             </div>
-          </div>
-          <div class="card">
+          </article>
+          <article class="card">
             <img
               class="card__image"
               src="./images/gora-elbrus.jpg"
               alt="Гора Эльбрус на фоне звездного неба."
             />
             <div class="card__container">
-              <h3 class="card__title">Гора Эльбрус</h3>
-              <button type="button" class="button button__like"></button>
+              <h2 class="card__title">Гора Эльбрус</h2>
+              <button type="button" class="button card__like-button"></button>
             </div>
-          </div>
-          <div class="card">
+          </article>
+          <article class="card">
             <img
               class="card__image"
               src="./images/dombai.jpg"
               alt="Горы Домбая в зимнем пейзаже."
             />
             <div class="card__container">
-              <h3 class="card__title">Домбай</h3>
-              <button type="button" class="button button__like"></button>
+              <h2 class="card__title">Домбай</h2>
+              <button type="button" class="button card__like-button"></button>
             </div>
-          </div>
-          <div class="card">
+          </article>
+          <article class="card">
             <img
               class="card__image"
               src="./images/lenskiye-stolby.jpg"
               alt="Одноимённый национальный парк в Якутии на берегу реки Лены."
             />
             <div class="card__container">
-              <h3 class="card__title">Ленские столбы</h3>
-              <button type="button" class="button button__like"></button>
+              <h2 class="card__title">Ленские столбы</h2>
+              <button type="button" class="button card__like-button"></button>
             </div>
-          </div>
-          <div class="card">
+          </article>
+          <article class="card">
             <img
               class="card__image"
               src="./images/sayan-mountains.jpg"
               alt="Саянские горы на фоне голубого неба."
             />
             <div class="card__container">
-              <h3 class="card__title">Саянские горы</h3>
-              <button type="button" class="button button__like"></button>
+              <h2 class="card__title">Саянские горы</h2>
+              <button type="button" class="button card__like-button"></button>
             </div>
-          </div>
-          <div class="card">
+          </article>
+          <article class="card">
             <img
               class="card__image"
               src="./images/koyashs'ke-lake.jpg"
               alt="Розовые воды Кояшского озера."
             />
             <div class="card__container">
-              <h3 class="card__title">Кояшское озеро</h3>
-              <button type="button" class="button button__like"></button>
+              <h2 class="card__title">Кояшское озеро</h2>
+              <button type="button" class="button card__like-button"></button>
             </div>
-          </div>
+          </article>
         </section>
       </main>
+      <!-- Footer -->
+      <footer class="footer">
+        <p class="footer__copyright" href="#">&#169; 2023 Mesto Russia</p>
+      </footer>
     </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <a class="footer__copyright" href="#">&#169; 2023 Mesto Russia</a>
-    </footer>
   </body>
 </html>

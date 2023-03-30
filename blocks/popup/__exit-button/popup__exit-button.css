@@ -1,4 +1,4 @@
-.button__exit {
+.popup__exit-button {
   background-image: url(./../../../images/close-button.svg);
   background-color: transparent;
   width: 32px;
@@ -9,7 +9,7 @@
 }
 
 @media only screen and (max-width: 695px) {
-  .button__exit {
+  .popup__exit-button {
     background-image: url(./../../../images/close-button_mobile.svg);
     width: 20px;
     height: 20px;
