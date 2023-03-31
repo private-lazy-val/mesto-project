@@ -1,9 +1,10 @@
 .logo {
   max-width: 142px;
+  transition: opacity .3s linear;
 }
 
 .logo:hover {
-  cursor: pointer;
+  opacity: .7;
 }
 
 @media only screen and (max-width: 695px) {
