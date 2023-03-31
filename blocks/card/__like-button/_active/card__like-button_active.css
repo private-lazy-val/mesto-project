@@ -1,3 +1,8 @@
 .card__like-button_active {
   background-image: url(./../../../../images/like-button_active.svg);
 }
+
+/* В соответствии с макетом при наведении на закрашенное сердечко opacity не меняется */
+.card__like-button_active:hover {
+  opacity: inherit;
+}
