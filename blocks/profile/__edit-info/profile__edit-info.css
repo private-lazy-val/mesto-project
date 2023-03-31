@@ -1,5 +1,6 @@
 .profile__edit-info {
   display: flex;
+  justify-content: center;
   align-items: baseline;
   margin-left: 30px;
 }

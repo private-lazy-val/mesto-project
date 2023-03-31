@@ -22,34 +22,6 @@
             alt="Логотип сайта Место."
         /></a>
       </header>
-
-      <!-- Pop-up -->
-      <div class="popup">
-        <div class="popup__container">
-          <h2 class="popup__header">Редактировать профиль</h2>
-          <button class="button popup__exit-button"></button>
-          <form class="popup__form" name="edit-profile-form">
-            <input
-              type="text"
-              class="popup__input-field popup__input-field_el_name"
-              name="user-name"
-              placeholder="Имя"
-              required
-            />
-            <input
-              type="text"
-              class="popup__input-field popup__input-field_el_occupation"
-              name="user-occupation"
-              placeholder="Описание"
-              required
-            />
-            <button type="submit" class="button popup__save-button">
-              Сохранить
-            </button>
-          </form>
-        </div>
-      </div>
-
       <!-- Main Content -->
       <main class="content">
         <!-- Profile -->
@@ -86,7 +58,7 @@
               <h2 class="card__title">Карачаево-Черкесс</h2>
               <button
                 type="button"
-                class="button card__like-button_active"
+                class="button card__like-button card__like-button_active"
               ></button>
             </div>
           </article>
@@ -151,6 +123,32 @@
       <footer class="footer">
         <p class="footer__copyright">&#169; 2023 Mesto Russia</p>
       </footer>
+      <!-- Pop-up -->
+      <div class="popup">
+        <div class="popup__container">
+          <h2 class="popup__header">Редактировать профиль</h2>
+          <button type="button" class="button popup__exit-button"></button>
+          <form class="popup__form" name="edit-profile-form">
+            <input
+              type="text"
+              class="popup__input-field popup__input-field_el_name"
+              name="user-name"
+              placeholder="Имя"
+              required
+            />
+            <input
+              type="text"
+              class="popup__input-field popup__input-field_el_occupation"
+              name="user-occupation"
+              placeholder="Описание"
+              required
+            />
+            <button type="submit" class="button popup__save-button">
+              Сохранить
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   </body>
 </html>
