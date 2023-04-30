@@ -13,11 +13,6 @@
   padding: 15px 0 16px;
 }
 
-.popup__save-button:focus {
-  outline: #222 solid 1px;
-  outline-offset: 2px;
-  transition-delay: 0.1s;
-}
 
 .popup__save-button:hover {
   opacity: .8;
