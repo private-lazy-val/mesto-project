@@ -47,84 +47,15 @@
         <section
           class="cards"
           aria-label="Карточки с фотографиями интересных мест в России."
-        >
-          <article class="card">
-            <img
-              class="card__image"
-              src="./images/karachay-cherkessia.jpg"
-              alt="Сентинский храм в Карачаево-Черкесии."
-            />
-            <div class="card__container">
-              <h2 class="card__title">Карачаево-Черкесс</h2>
-              <button
-                type="button"
-                class="button card__like-button"
-              ></button>
-            </div>
-          </article>
-          <article class="card">
-            <img
-              class="card__image"
-              src="./images/gora-elbrus.jpg"
-              alt="Гора Эльбрус на фоне звездного неба."
-            />
-            <div class="card__container">
-              <h2 class="card__title">Гора Эльбрус</h2>
-              <button type="button" class="button card__like-button"></button>
-            </div>
-          </article>
-          <article class="card">
-            <img
-              class="card__image"
-              src="./images/dombai.jpg"
-              alt="Горы Домбая в зимнем пейзаже."
-            />
-            <div class="card__container">
-              <h2 class="card__title">Домбай</h2>
-              <button type="button" class="button card__like-button"></button>
-            </div>
-          </article>
-          <article class="card">
-            <img
-              class="card__image"
-              src="./images/lenskiye-stolby.jpg"
-              alt="Одноимённый национальный парк в Якутии на берегу реки Лены."
-            />
-            <div class="card__container">
-              <h2 class="card__title">Ленские столбы</h2>
-              <button type="button" class="button card__like-button"></button>
-            </div>
-          </article>
-          <article class="card">
-            <img
-              class="card__image"
-              src="./images/sayan-mountains.jpg"
-              alt="Саянские горы на фоне голубого неба."
-            />
-            <div class="card__container">
-              <h2 class="card__title">Саянские горы</h2>
-              <button type="button" class="button card__like-button"></button>
-            </div>
-          </article>
-          <article class="card">
-            <img
-              class="card__image"
-              src="./images/koyashskoe-lake.jpg"
-              alt="Розовые воды Кояшского озера."
-            />
-            <div class="card__container">
-              <h2 class="card__title">Кояшское озеро</h2>
-              <button type="button" class="button card__like-button"></button>
-            </div>
-          </article>
-        </section>
+        ></section>
       </main>
       <!-- Footer -->
       <footer class="footer">
         <p class="footer__copyright">&#169; 2023 Mesto Russia</p>
       </footer>
-      <!-- Pop-up -->
-      <div class="popup">
+
+      <!-- Edit Profile Pop-Up -->
+      <div class="popup edit-profile">
         <div class="popup__container">
           <h2 class="popup__header">Редактировать профиль</h2>
           <button type="button" class="button popup__exit-button"></button>
@@ -149,6 +80,46 @@
           </form>
         </div>
       </div>
+
+      <!-- Add New Place Pop-Up -->
+      <div class="popup add-place">
+        <div class="popup__container">
+          <h2 class="popup__header">Новое место</h2>
+          <button type="button" class="button popup__exit-button"></button>
+          <form class="popup__form" name="add-new-place">
+            <input
+              type="text"
+              class="popup__input-field popup__input-field_el_title"
+              name="place-name"
+              placeholder="Название"
+              required
+            />
+            <input
+              type="text"
+              class="popup__input-field popup__input-field_el_link"
+              name="place-link"
+              placeholder="Ссылка на картинку"
+              required
+            />
+            <button type="submit" class="button popup__save-button">
+              Создать
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Card Template -->
+      <template id="card">
+        <article class="card">
+          <img class="card__image" alt="Фотография места." />
+          <button type="button" class="button card__delete-button"></button>
+          <div class="card__container">
+            <h2 class="card__title"></h2>
+            <button type="button" class="button card__like-button"></button>
+          </div>
+        </article>
+      </template>
     </div>
+    <script src="index.js"></script>
   </body>
 </html>
