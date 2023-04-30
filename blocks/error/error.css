@@ -1,0 +1,9 @@
+.error {
+  color: #ff3860;
+  font-family: 'Inter', Helvetica, sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+}

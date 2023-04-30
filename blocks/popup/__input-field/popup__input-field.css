@@ -11,8 +11,3 @@
   outline: transparent;
 }
 
-.popup__input-field:focus {
-  outline: #222 solid 1px;
-  transition-delay: .1s;
-}
-

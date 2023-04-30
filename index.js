@@ -35,11 +35,37 @@ function openImagePopup(imageSrc, imageName) {
   imagePopup.classList.add("popup_opened");
 }
 
+// Get corresponding error
+function getCorrespondingError(element) {
+  const inputControl = element.parentElement;
+  const errorElement = inputControl.querySelector(".error");
+  return errorElement;
+}
+
+// Set error
+function setError(element, message) {
+  const errorElement = getCorrespondingError(element);
+  errorElement.textContent = message;
+  newPlaceLink.classList.add("popup__input-field_error");
+}
+
+// Clear error
+function clearError(element) {
+  const errorElement = getCorrespondingError(element);
+  errorElement.textContent = "";
+  newPlaceLink.classList.remove("popup__input-field_error");
+}
+
+// Clear error on input focus
+newPlaceLink.addEventListener("input", function () {
+  clearError(newPlaceLink);
+});
+
 // Sanitize url
 function sanitizeUrl(url) {
   const urlPattern = /^https?:\/\/\S+/;
-  if (!urlPattern.test(url)) {
-    throw new Error("Invalid URL provided.");
+  if (!urlPattern.test(url.trim())) {
+    throw new Error("Invalid URL");
   }
   return url;
 }
@@ -56,6 +82,19 @@ function initEditProfileButton() {
   });
 }
 
+// Add listener to submit event in Profile Edit form
+function initProfileEditForm() {
+  profileEditForm.addEventListener("submit", function (evt) {
+    // Save changes without reloading the entire page
+    evt.preventDefault();
+    closePopup(profileEditPopup);
+    document.querySelector(".profile__name").textContent =
+      profileEditName.value;
+    document.querySelector(".profile__occupation").textContent =
+      profileEditOccupation.value;
+  });
+}
+
 // Initialize Add New Place button
 function initAddPlaceButton() {
   newPlaceAddButton.addEventListener("click", function () {
@@ -63,41 +102,7 @@ function initAddPlaceButton() {
   });
 }
 
-// Add listener to submit event in Profile Edit form
-function initProfileEditForm() {
-  profileEditForm.addEventListener("submit", function (evt) {
-    // Save changes without reloading the entire page and close popup
-    evt.preventDefault();
-    if (profileEditForm.checkValidity()) {
-      closePopup(profileEditPopup);
-      document.querySelector(".profile__name").textContent =
-        profileEditName.value;
-      document.querySelector(".profile__occupation").textContent =
-        profileEditOccupation.value;
-    } else {
-      profileEditForm.reportValidity();
-    }
-  });
-}
-
-// Add listener to submit event in New Place form
-function initNewPlaceForm() {
-  newPlaceForm.addEventListener("submit", function (evt) {
-    // Save changes without reloading the entire page and close popup
-    evt.preventDefault();
-    if (newPlaceForm.checkValidity()) {
-      const name = newPlaceName.value;
-      const rawLink = newPlaceLink.value;
-      const cardElement = createCard(name, rawLink);
-      closePopup(newPlacePopup);
-      cards.prepend(cardElement);
-    } else {
-      newPlaceForm.reportValidity();
-    }
-  });
-}
-
-// Create new card and return
+// Create and return new card
 function createCard(name, rawLink) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const cardImageElement = cardElement.querySelector(".card__image");
@@ -118,6 +123,24 @@ function createCard(name, rawLink) {
     openImagePopup(sanitizedLink, name);
   });
   return cardElement;
+}
+
+// Add listener to submit event in Add New Place form
+function initNewPlaceForm() {
+  newPlaceForm.addEventListener("submit", function (evt) {
+    // Save changes without reloading the entire page
+    evt.preventDefault();
+    const name = newPlaceName.value;
+    const rawLink = newPlaceLink.value;
+    try {
+      const cardElement = createCard(name, rawLink);
+      closePopup(newPlacePopup);
+      newPlaceForm.reset();
+      cards.prepend(cardElement);
+    } catch (err) {
+      setError(newPlaceLink, "Invalid URL");
+    }
+  });
 }
 
 // Array of initial cards
@@ -171,6 +194,7 @@ profileEditExit.addEventListener("click", function () {
 newPlaceExit.addEventListener("click", function () {
   closePopup(newPlacePopup);
   newPlaceForm.reset();
+  clearError(newPlaceLink);
 });
 
 // Close image popup
