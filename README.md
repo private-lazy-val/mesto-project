@@ -1,6 +1,6 @@
 # Mesto Project
 
-This project showcases some of the most beautiful and remarkable places in Russia, created using HTML and CSS. The website design is adaptive and responsive, ensuring that it looks great on various devices and screen sizes. Additionally, a simple dialogue window with a form has been implemented to edit user's name and occupation.
+The Mesto project was created as part of a web development learning program. The project aims to demonstrate proficiency in HTML, CSS, and JavaScript.
 
 ## Table of Contents
 
@@ -15,7 +15,7 @@ This project showcases some of the most beautiful and remarkable places in Russi
 
 ### Intro
 
-This project aims to provide an engaging and visually appealing experience for users interested in exploring Russia's stunning landscapes, historical sites, and cultural attractions.
+The Mesto project is a responsive web application built with HTML, CSS, and JavaScript. The application showcases interesting places in Russia through a series of cards. Users can edit their profile, add new cards, and view card images in full-screen mode.
 
 ### Figma
 
@@ -29,10 +29,9 @@ All images used in this project have been optimized for faster loading and bette
 
 ### Hosting
 
-Mesto project is hosted on GitHub Pages and Vercel. You can view the live sites here:
+Mesto project is hosted on GitHub Pages.
 
 - [https://private-lazy-val.github.io/mesto-project/](https://private-lazy-val.github.io/mesto-project/)
-- [https://private-lazy-val-mesto-project.vercel.app/](https://private-lazy-val-mesto-project.vercel.app/)
 
 ## Technologies
 
@@ -40,6 +39,7 @@ The following technologies were used to develop this project:
 
 - HTML5
 - CSS3
+- JS
 - Media queries
 - Responsive web design
 - Flexbox and Grid

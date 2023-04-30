@@ -2,7 +2,7 @@
   color: rgb(84, 84, 84);
   font-weight: 400;
   font-size: 18px;
-  line-height: 22px;
+  line-height: 1.2;
 }
 
 @media only screen and (max-width: 695px) {

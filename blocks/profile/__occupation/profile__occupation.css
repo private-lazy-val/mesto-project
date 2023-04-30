@@ -1,7 +1,7 @@
 .profile__occupation {
   font-weight: 400;
   font-size: 18px;
-  line-height: 22px;
+  line-height: 1.22;
   margin: 16px 0 0 30px;
   white-space: nowrap;
   overflow: hidden;

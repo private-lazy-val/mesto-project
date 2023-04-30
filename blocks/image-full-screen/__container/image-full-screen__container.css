@@ -1,0 +1,8 @@
+.image-full-screen__container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+

@@ -28,18 +28,18 @@
         <section class="profile">
           <img
             class="profile__avatar"
-            src="./images/avatar.jpg"
+            src="./images/pekingese.jpeg"
             alt="Аватар пользователя."
           />
           <div class="profile__info">
             <div class="profile__edit-info">
-              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <h1 class="profile__name">Пекинес</h1>
               <button
                 type="button"
                 class="button profile__edit-button"
               ></button>
             </div>
-            <p class="profile__occupation">Исследователь океана</p>
+            <p class="profile__occupation">Лучший друг</p>
           </div>
           <button type="button" class="button profile__add-button"></button>
         </section>
@@ -108,6 +108,17 @@
         </div>
       </div>
 
+       <!-- Full-screen card image -->
+       <div class="popup image-full-screen">
+        <div class="image-full-screen__container">
+          <button type="button" class="button popup__exit-button"></button>
+          <figure class="image-full-screen__figure">
+            <img class="image-full-screen__image" alt="">
+            <figcaption class="image-full-screen__figcaption"></figcaption>
+          </figure>
+        </div>
+      </div>
+
       <!-- Card Template -->
       <template id="card">
         <article class="card">
@@ -119,6 +130,7 @@
           </div>
         </article>
       </template>
+
     </div>
     <script src="index.js"></script>
   </body>
