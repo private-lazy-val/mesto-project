@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="./pages/index.css" />
     <link rel="icon" type="image/svg+xml" href="./images/favicon.svg" />
     <title>Mesto</title>
-    <script defer src="index.js"></script>
+    <script type="module" defer src="cards.js"></script>
+    <script type="module" defer src="index.js"></script>
   </head>
 
   <!-- Root -->
@@ -115,7 +116,7 @@
       </div>
 
       <!-- Full-screen card image -->
-      <div class="popup image-full-screen">
+      <div class="popup popup_background_dark image-full-screen">
         <div class="image-full-screen__container">
           <button type="button" class="button popup__exit-button"></button>
           <figure class="image-full-screen__figure">
@@ -128,7 +129,7 @@
       <!-- Card Template -->
       <template id="card">
         <article class="card">
-          <img class="card__image" alt="Фотография места." />
+          <img class="card__image" alt="" />
           <button type="button" class="button card__delete-button"></button>
           <div class="card__container">
             <h2 class="card__title"></h2>

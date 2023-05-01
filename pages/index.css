@@ -58,6 +58,7 @@
 @import url(../blocks/popup/__exit-button/popup__exit-button.css);
 @import url(../blocks/popup/__input-control/popup__input-control.css);
 @import url(../blocks/popup/__input-field/_error/popup__input-field_error.css);
+@import url(../blocks/popup/_background_dark/popup_background_dark.css);
 
 /* Full-screen image */
 @import url(../blocks/image-full-screen/__container/image-full-screen__container.css);
