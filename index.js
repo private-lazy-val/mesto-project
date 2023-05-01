@@ -56,7 +56,7 @@ function clearError(element) {
   newPlaceLink.classList.remove("popup__input-field_error");
 }
 
-// Clear error on input focus
+// Add listener to input action in url field
 newPlaceLink.addEventListener("input", function () {
   clearError(newPlaceLink);
 });
