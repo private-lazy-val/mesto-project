@@ -1,27 +1,27 @@
-.popup__save-button {
+.form__submit {
   width: 100%;
   border: 0;
   border-radius: 2px;
   background-color: #000;
   color: #fff;
-  border-radius: 2px;
   font-weight: 400;
   font-size: 18px;
   line-height: 1;
   cursor: pointer;
   outline: transparent;
   padding: 15px 0 16px;
+  margin-top: 48px;
 }
 
-
-.popup__save-button:hover {
+.form__submit:hover {
   opacity: .8;
 }
 
 @media only screen and (max-width: 695px) {
-  .popup__save-button {
+  .form__submit {
     font-size: 14px;
     line-height: 17px;
     padding: 15px 0;
+    margin-top: 45px;
   }
 }

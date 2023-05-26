@@ -1,4 +1,4 @@
-.popup__input-field {
+.form__input-field {
   font-weight: 400;
   font-size: 14px;
   line-height: 1.85;
@@ -6,8 +6,8 @@
   border-radius: 2px;
   width: 100%;
   box-sizing: border-box;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid #C4C4C4;
   padding: 0;
   outline: transparent;
+  position: relative;
 }
-

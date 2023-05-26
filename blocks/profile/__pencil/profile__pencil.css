@@ -1,0 +1,9 @@
+.profile__pencil {
+  background-image: url(../../../images/pencil.svg);
+  height: 26px;
+  width: 26px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+}

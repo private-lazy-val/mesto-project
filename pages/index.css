@@ -19,6 +19,8 @@
 
 /* Profile */
 @import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__edit-avatar-container/profile__edit-avatar-container.css);
+@import url(../blocks/profile/__pencil/profile__pencil.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__edit-info/profile__edit-info.css);
 @import url(../blocks/profile/__info/profile__info.css);
@@ -26,6 +28,7 @@
 @import url(../blocks/profile/__occupation/profile__occupation.css);
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
+@import url(../blocks/profile/__overlay/profile__overlay.css);
 
 /* Button */
 @import url(../blocks/button/button.css);
@@ -47,18 +50,25 @@
 /* Popups */
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/__container/popup__container.css);
-@import url(../blocks/popup/__input-field/popup__input-field.css);
-@import url(../blocks/popup/__input-field/_el/popup__input-field_el_name.css);
-@import url(../blocks/popup/__input-field/_el/popup__input-field_el_title.css);
-@import url(../blocks/popup/__input-field/_el/popup__input-field_el_occupation.css);
-@import url(../blocks/popup/__input-field/_el/popup__input-field_el_link.css);
+@import url(../blocks/popup/__container/_single-input/popup__container_single-input.css);
 @import url(../blocks/popup/__header/popup__header.css);
-@import url(../blocks/popup/__save-button/popup__save-button.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__exit-button/popup__exit-button.css);
-@import url(../blocks/popup/__input-control/popup__input-control.css);
-@import url(../blocks/popup/__input-field/_error/popup__input-field_error.css);
-@import url(../blocks/popup/_background_dark/popup_background_dark.css);
+@import url(../blocks/popup/_background/popup_background_dark.css);
+
+/* Forms */
+@import url(../blocks/form/form.css);
+@import url(../blocks/form/__input-field/form__input-field.css);
+@import url(../blocks/form/__input-field/_el/form__input-field_el_name.css);
+@import url(../blocks/form/__input-field/_el/form__input-field_el_url.css);
+@import url(../blocks/form/__input-field/_el/form__input-field_el_avatar.css);
+@import url(../blocks/form/__input-field/_el/form__input-field_el_occupation.css);
+@import url(../blocks/form/__input-field/_el/form__input-field_el_title.css);
+@import url(../blocks/form/__input-field/_type/form__input-field_type_error.css);
+@import url(../blocks/form/__submit/form__submit.css);
+@import url(../blocks/form/__submit/_inactive/form__submit_inactive.css);
+@import url(../blocks/form/__input-error/form__input-error.css);
+@import url(../blocks/form/__input-error/_active/form__input-error_active.css);
 
 /* Full-screen image */
 @import url(../blocks/image-full-screen/__container/image-full-screen__container.css);
@@ -66,5 +76,4 @@
 @import url(../blocks/image-full-screen/__image/image-full-screen__image.css);
 @import url(../blocks/image-full-screen/__figcaption/image-full-screen__figcaption.css);
 
-/* Error */
-@import url(../blocks/error/error.css);
+

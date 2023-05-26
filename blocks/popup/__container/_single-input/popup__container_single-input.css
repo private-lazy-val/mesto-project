@@ -1,0 +1,9 @@
+.popup__container_single-input {
+  height: 272px;
+}
+
+@media only screen and (max-width: 695px) {
+  .popup__container_single-input {
+    height: 265px;
+  }
+}
