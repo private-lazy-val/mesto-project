@@ -1,5 +1,3 @@
-
-
 // Add error to input field
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
