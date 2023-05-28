@@ -45,4 +45,3 @@ The following technologies were used to develop this project:
 - Babel
 - PostCSS
 - Core-JS
-- Image optimization tools (e.g., tiny png)

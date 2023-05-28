@@ -38,9 +38,11 @@ const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.disabled = true;
     buttonElement.classList.add("form__submit_inactive");
+    buttonElement.style.cursor = 'default';
   } else {
     buttonElement.disabled = false;
     buttonElement.classList.remove("form__submit_inactive");
+    buttonElement.style.cursor = 'cursor';
   }
 };
 
