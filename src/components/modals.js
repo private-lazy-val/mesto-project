@@ -27,6 +27,5 @@ function addPopupEventListeners(popupObj) {
   );
 }
 
-
 export { openPopup, closePopup, addPopupEventListeners };
 

@@ -1,30 +1,4 @@
-// Add error to input field
-const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add("form__input-field_type_error");
-  errorElement.classList.add("form__input-error_active");
-  errorElement.textContent = errorMessage;
-};
-
-// Remove error from input field
-const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove("form__input-field_type_error");
-  errorElement.classList.remove("form__input-error_active");
-  errorElement.textContent = "";
-};
-
-// Reset errors for a form
-function resetFormErrors(formElement) {
-  if (formElement) {
-    const inputList = Array.from(
-      formElement.querySelectorAll(".form__input-field")
-    );
-    inputList.forEach((inputElement) => {
-      hideInputError(formElement, inputElement);
-    });
-  }
-}
+import { showInputError, hideInputError } from "./utils.js";
 
 // Сheck whether an array has invalid inputs
 const hasInvalidInput = (inputList) => {
@@ -34,57 +8,62 @@ const hasInvalidInput = (inputList) => {
 };
 
 // Toggle submit button
-const toggleButtonState = (inputList, buttonElement) => {
+const toggleButtonState = (inputList, buttonElement, formObj) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.disabled = true;
-    buttonElement.classList.add("form__submit_inactive");
-    buttonElement.style.cursor = 'default';
+    buttonElement.classList.add(formObj.inactiveButtonClass);
+    buttonElement.style.cursor = "default";
   } else {
     buttonElement.disabled = false;
-    buttonElement.classList.remove("form__submit_inactive");
-    buttonElement.style.cursor = 'cursor';
+    buttonElement.classList.remove(formObj.inactiveButtonClass);
+    buttonElement.style.cursor = "pointer";
   }
 };
 
 // Check validity of the input field
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement, formObj) => {
   if (inputElement.validity.patternMismatch) {
     inputElement.setCustomValidity(inputElement.dataset.errorMessage);
   } else {
     inputElement.setCustomValidity("");
   }
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(
+      formElement,
+      inputElement,
+      inputElement.validationMessage,
+      formObj
+    );
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, formObj);
   }
 };
 
 // Set listeners for input fields
-const setEventListeners = (formElement) => {
+const setEventListeners = (formElement, formObj) => {
   const inputList = Array.from(
-    formElement.querySelectorAll(".form__input-field")
+    formElement.querySelectorAll(formObj.inputSelector)
   );
-  const buttonElement = formElement.querySelector(".form__submit");
-  toggleButtonState(inputList, buttonElement);
+  const buttonElement = formElement.querySelector(formObj.submitButtonSelector);
+  toggleButtonState(inputList, buttonElement, formObj);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
+      checkInputValidity(formElement, inputElement, formObj);
+      toggleButtonState(inputList, buttonElement, formObj);
     });
   });
 };
 
 // Validate form
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll(".form"));
+const enableValidation = (formObj) => {
+  const formList = Array.from(document.querySelectorAll(formObj.formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", (evt) => {
       // Save changes without reloading the entire page
       evt.preventDefault();
     });
-    setEventListeners(formElement);
+    setEventListeners(formElement, formObj);
   });
 };
 
-export { enableValidation, resetFormErrors };
+export { enableValidation };
