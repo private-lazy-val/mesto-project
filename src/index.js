@@ -1,3 +1,4 @@
+import './pages/index.css';
 import { addPopupEventListeners } from "./components/utils.js";
 import { initialCards } from "./components/cards.js";
 import {

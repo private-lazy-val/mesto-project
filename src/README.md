@@ -37,12 +37,12 @@ Mesto project is hosted on GitHub Pages.
 
 The following technologies were used to develop this project:
 
-- HTML5
-- CSS3
-- JS
+- HTML5 / CSS3 / JS
 - Media queries
 - Responsive web design
 - Flexbox and Grid
-- Git and GitHub
-- Figma
+- Webpack
+- Babel
+- PostCSS
+- Core-JS
 - Image optimization tools (e.g., tiny png)

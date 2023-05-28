@@ -4,11 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./pages/index.css" />
     <link rel="icon" type="image/svg+xml" href="./images/favicon.svg" />
     <title>Mesto</title>
-    <script type="module" defer src="cards.js"></script>
-    <script type="module" defer src="index.js"></script>
   </head>
 
   <!-- Root -->
@@ -20,7 +17,7 @@
         <a class="logo" href="#"
           ><img
             class="logo__image"
-            src="./images/logo.svg"
+            src="<%=require('./images/logo.svg')%>"
             alt="Логотип сайта Место."
         /></a>
       </header>
@@ -31,7 +28,7 @@
           <div class="profile__edit-avatar-container">
             <img
               class="profile__avatar"
-              src="./images/pekingese.jpeg"
+              src="<%=require('./images/peki.jpg')%>"
               alt="Аватар пользователя."
             />
             <div class="profile__overlay">
@@ -70,15 +67,13 @@
             <input
               type="url"
               class="form__input-field form__input-field_el_avatar"
-              id ="url-input"
+              id="url-input"
               name="avatar-url"
               placeholder="Ссылка на картинку"
               required
             />
             <span class="url-input-error form__input-error"></span>
-            <button type="submit" class="button form__submit">
-              Сохранить
-            </button>
+            <button type="submit" class="button form__submit">Сохранить</button>
           </form>
         </div>
       </div>
@@ -115,9 +110,7 @@
               required
             />
             <span class="occupation-input-error form__input-error"></span>
-            <button type="submit" class="button form__submit">
-              Сохранить
-            </button>
+            <button type="submit" class="button form__submit">Сохранить</button>
           </form>
         </div>
       </div>
@@ -150,9 +143,7 @@
               required
             />
             <span class="url-input-error form__input-error"></span>
-            <button type="submit" class="button form__submit">
-              Создать
-            </button>
+            <button type="submit" class="button form__submit">Создать</button>
           </form>
         </div>
       </div>
