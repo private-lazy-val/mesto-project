@@ -9,6 +9,8 @@ import { enableValidation } from "./components/validate.js";
 import { createCard } from "./components/card.js";
 import { resetFormErrors } from "./components/utils.js";
 
+const cards = document.querySelector(".cards");
+
 const formObj = {
   formSelector: ".form",
   inputSelector: ".form__input-field",
@@ -16,9 +18,9 @@ const formObj = {
   inactiveButtonClass: "form__submit_inactive",
   inputErrorClass: "form__input-field_type_error",
   activeErrorClass: "form__input-error_active",
-}
+};
 
-// Helper function that adds event listener to forms and resets them on closure
+// Add event listener to a form so that it resets on closure
 function addListenersForFormReset(popup, form, exitButton) {
   function resetForm() {
     form.reset();
@@ -182,15 +184,13 @@ function createAvatarPopup() {
   };
 }
 
-const cards = document.querySelector(".cards");
-const cardAddPopup = createAddCardPopup(cards, imagePopup);
 const avatarPopup = createAvatarPopup();
 const profileEditPopup = createProfileEditPopup();
 const imagePopup = createImagePopup();
+const cardAddPopup = createAddCardPopup(cards, imagePopup);
 
 // Close popup if
-// ESC button is pressed
-// OR "X" icon is clicked
+// "X" icon is clicked
 // OR click outside of popup
 addPopupEventListeners(profileEditPopup);
 addPopupEventListeners(cardAddPopup);
@@ -205,3 +205,5 @@ initialCards.forEach((cardObj) => {
   const cardElement = createCard(cardObj, imagePopup);
   cards.append(cardElement);
 });
+
+

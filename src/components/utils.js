@@ -14,7 +14,7 @@ const hideInputError = (formElement, inputElement, formObj) => {
   errorElement.textContent = "";
 };
 
-// Reset errors for a form
+// Reset errors in a form
 function resetFormErrors(formElement, formObj) {
   if (formElement) {
     const inputList = Array.from(

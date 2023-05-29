@@ -1,4 +1,3 @@
-
 function closeByEsc(evt) {
   if (evt.key === "Escape") {
     const openedPopup = document.querySelector(".popup_opened");
@@ -16,7 +15,7 @@ function closePopup(popup) {
   document.removeEventListener("keydown", closeByEsc);
 }
 
-// Function that adds event listeners to popup and closes them
+// Add event listeners to popup so that it closes when predicate is satisfied
 function addPopupEventListeners(popupObj) {
   const popup = popupObj.popup;
   const exitButton = popupObj.exitButton;
@@ -28,4 +27,3 @@ function addPopupEventListeners(popupObj) {
 }
 
 export { openPopup, closePopup, addPopupEventListeners };
-

@@ -2,7 +2,6 @@ const cardTemplate = document
   .querySelector("#card")
   .content.querySelector(".card");
 
-
 // Create and return new card
 function createCard(cardObj, imagePopup) {
   const name = cardObj.name;
