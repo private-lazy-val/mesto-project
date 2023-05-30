@@ -20,19 +20,10 @@ const formObj = {
   activeErrorClass: "form__input-error_active",
 };
 
-// Add event listener to a form so that it resets on closure
-function addListenersForFormReset(popup, form, exitButton) {
-  function resetForm() {
-    form.reset();
-    resetFormErrors(form, formObj);
-  }
-  exitButton.addEventListener("click", () => resetForm());
-  popup.addEventListener("click", (evt) =>
-    evt.target.classList.contains("popup_opened") ? resetForm() : null
-  );
-  document.addEventListener("keydown", (evt) =>
-    evt.key === "Escape" ? resetForm() : null
-  );
+// Reset form
+function resetForm(form, formObj) {
+  form.reset();
+  resetFormErrors(form, formObj);
 }
 
 function createImagePopup() {
@@ -72,6 +63,7 @@ function createProfileEditPopup() {
 
   openButton.addEventListener("click", function () {
     openPopup(popup);
+    resetForm(form, formObj);
     formName.value = name.textContent;
     formOccupation.value = occupation.textContent;
     submitButton.disabled = true;
@@ -83,8 +75,6 @@ function createProfileEditPopup() {
     name.textContent = formName.value;
     occupation.textContent = formOccupation.value;
   });
-
-  addListenersForFormReset(popup, form, exitButton);
 
   return {
     openButton: openButton,
@@ -110,6 +100,7 @@ function createAddCardPopup(cards, imagePopup) {
 
   addButton.addEventListener("click", function () {
     openPopup(popup);
+    resetForm(form, formObj);
     submitButton.disabled = true;
     submitButton.classList.add("form__submit_inactive");
   });
@@ -121,8 +112,6 @@ function createAddCardPopup(cards, imagePopup) {
     form.reset();
     cards.prepend(cardElement);
   });
-
-  addListenersForFormReset(popup, form, exitButton);
 
   return {
     addButton: addButton,
@@ -148,6 +137,7 @@ function createAvatarPopup() {
 
   pencilButton.addEventListener("click", function () {
     openPopup(popup);
+    resetForm(form, formObj);
     url.value = img.src;
     submitButton.disabled = true;
     submitButton.classList.add("form__submit_inactive");
@@ -168,8 +158,6 @@ function createAvatarPopup() {
     closePopup(popup);
     img.src = url.value;
   });
-
-  addListenersForFormReset(popup, form, exitButton);
 
   return {
     container: container,
@@ -205,5 +193,3 @@ initialCards.forEach((cardObj) => {
   const cardElement = createCard(cardObj, imagePopup);
   cards.append(cardElement);
 });
-
-

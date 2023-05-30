@@ -2,6 +2,7 @@
   background-color: transparent;;
   border: 1px solid #C4C4C4;
   color: #C4C4C4;
+  cursor: default;
 }
 
 .form__submit_inactive:hover {

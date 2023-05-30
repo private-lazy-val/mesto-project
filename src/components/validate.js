@@ -12,11 +12,9 @@ const toggleButtonState = (inputList, buttonElement, formObj) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.disabled = true;
     buttonElement.classList.add(formObj.inactiveButtonClass);
-    buttonElement.style.cursor = "default";
   } else {
     buttonElement.disabled = false;
     buttonElement.classList.remove(formObj.inactiveButtonClass);
-    buttonElement.style.cursor = "pointer";
   }
 };
 
