@@ -1,5 +1,4 @@
 import "./pages/index.css";
-import { initialCards } from "./components/cards.js";
 import {
   openPopup,
   closePopup,
@@ -9,7 +8,45 @@ import { enableValidation } from "./components/validate.js";
 import { createCard } from "./components/card.js";
 import { resetFormErrors } from "./components/utils.js";
 
-const cards = document.querySelector(".cards");
+import { getUser, getInitialCards, editProfile, addCard } from "./api.js";
+
+const cardsContainer = document.querySelector(".cards");
+let userId;
+
+function adaptCardToCardObj(card, userId) {
+  return {
+    name: card.name,
+    url: card.link,
+    likes: card.likes.length,
+    ownerId: card.owner._id,
+    cardId: card._id,
+    userId: userId,
+  };
+}
+
+// Render user
+function handleGetUser() {
+  getUser().then((userData) => {
+    document.querySelector(".profile__occupation").textContent = userData.about;
+    document.querySelector(".profile__name").textContent = userData.name;
+    document.querySelector(".profile__avatar").src = userData.avatar;
+    userId = userData._id;
+  });
+}
+
+handleGetUser();
+
+// Render initial card after page loading
+function handleGetInitialCards() {
+  getInitialCards().then((cards) =>
+    cards
+      .map(adaptCardToCardObj)
+      .map((cardObj) => createCard(cardObj, imagePopup, userId))
+      .forEach((cardElement) => cardsContainer.append(cardElement))
+  );
+}
+
+handleGetInitialCards();
 
 const formObj = {
   formSelector: ".form",
@@ -48,6 +85,13 @@ function createImagePopup() {
   };
 }
 
+function handleEditProfile(updatedData) {
+  editProfile(updatedData).then((userData) => {
+    document.querySelector(".profile__name").textContent = userData.name;
+    document.querySelector(".profile__occupation").textContent = userData.about;
+  });
+}
+
 function createProfileEditPopup() {
   const popup = document.querySelector(".edit-profile");
   const openButton = document.querySelector(".profile__edit-button");
@@ -70,10 +114,15 @@ function createProfileEditPopup() {
     submitButton.classList.add("form__submit_inactive");
   });
 
-  form.addEventListener("submit", function () {
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
     closePopup(popup);
-    name.textContent = formName.value;
-    occupation.textContent = formOccupation.value;
+    const name = profileEditPopup.formName.value;
+    const about = profileEditPopup.formOccupation.value;
+    handleEditProfile({
+      name: name,
+      about: about,
+    });
   });
 
   return {
@@ -89,7 +138,18 @@ function createProfileEditPopup() {
   };
 }
 
-function createAddCardPopup(cards, imagePopup) {
+function handleAddCard(cardObj) {
+  addCard(cardObj).then((card) => {
+    const cardElement = createCard(
+      adaptCardToCardObj(card, userId),
+      imagePopup,
+      userId
+    );
+    cardsContainer.prepend(cardElement);
+  });
+}
+
+function createAddCardPopup() {
   const addButton = document.querySelector(".profile__add-button");
   const popup = document.querySelector(".add-place");
   const exitButton = popup.querySelector(".popup__exit-button");
@@ -105,12 +165,12 @@ function createAddCardPopup(cards, imagePopup) {
     submitButton.classList.add("form__submit_inactive");
   });
 
-  form.addEventListener("submit", function () {
-    const cardObj = { name: name.value, url: url.value };
-    const cardElement = createCard(cardObj, imagePopup);
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const cardObj = { name: name.value, link: url.value };
+    handleAddCard(cardObj);
     closePopup(popup);
     form.reset();
-    cards.prepend(cardElement);
   });
 
   return {
@@ -175,7 +235,7 @@ function createAvatarPopup() {
 const avatarPopup = createAvatarPopup();
 const profileEditPopup = createProfileEditPopup();
 const imagePopup = createImagePopup();
-const cardAddPopup = createAddCardPopup(cards, imagePopup);
+const cardAddPopup = createAddCardPopup(cardsContainer, imagePopup);
 
 // Close popup if
 // "X" icon is clicked
@@ -187,9 +247,3 @@ addPopupEventListeners(avatarPopup);
 
 // Validate forms
 enableValidation(formObj);
-
-// Add a set of cards after page loading
-initialCards.forEach((cardObj) => {
-  const cardElement = createCard(cardObj, imagePopup);
-  cards.append(cardElement);
-});

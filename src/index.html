@@ -4,7 +4,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="<%=require('./images/favicon.svg')%>" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="<%=require('./images/favicon.svg')%>"
+    />
     <title>Mesto</title>
   </head>
 
@@ -28,7 +32,7 @@
           <div class="profile__edit-avatar-container">
             <img
               class="profile__avatar"
-              src="<%=require('./images/peki.jpg')%>"
+              src=""
               alt="Аватар пользователя."
             />
             <div class="profile__overlay">
@@ -37,13 +41,13 @@
           </div>
           <div class="profile__info">
             <div class="profile__edit-info">
-              <h1 class="profile__name">Пекинес</h1>
+              <h1 class="profile__name"></h1>
               <button
                 type="button"
                 class="button profile__edit-button"
               ></button>
             </div>
-            <p class="profile__occupation">Лучший друг</p>
+            <p class="profile__occupation"></p>
           </div>
           <button type="button" class="button profile__add-button"></button>
         </section>
@@ -159,14 +163,26 @@
         </div>
       </div>
 
+      <!-- Confirmation popup -->
+      <div class="popup confirmation-popup">
+        <div class="popup__container popup__container_no-input">
+          <h2 class="popup__header popup__header_confirm">Вы уверены?</h2>
+          <button type="button" class="button popup__exit-button"></button>
+          <button type="submit" class="button form__submit form__submit_confirm">Да</button>
+        </div>
+      </div>
+
       <!-- Card Template -->
       <template id="card">
         <article class="card">
           <img class="card__image" alt="" />
           <button type="button" class="button card__delete-button"></button>
-          <div class="card__container">
+          <div class="card__content">
             <h2 class="card__title"></h2>
-            <button type="button" class="button card__like-button"></button>
+            <div class="card__like-container">
+              <button type="button" class="button card__like-button"></button>
+              <p class="card__like-count"></p>
+            </div>
           </div>
         </article>
       </template>

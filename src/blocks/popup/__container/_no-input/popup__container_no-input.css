@@ -1,0 +1,9 @@
+.popup__container_no-input {
+  height: 181px;
+}
+
+@media only screen and (max-width: 695px) {
+  .popup__container_no-input {
+    height: 150px;
+  }
+}

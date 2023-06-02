@@ -1,5 +1,5 @@
 .button {
-  background-color: #000;
+  background-color: transparent;
   border: 0;
   cursor: pointer;
   transition: opacity .4s linear;

@@ -36,7 +36,9 @@
 /* Cards */
 @import url(../blocks/cards/cards.css);
 @import url(../blocks/card/card.css);
-@import url(../blocks/card/__container/card__container.css);
+@import url(../blocks/card/__content/card__content.css);
+@import url(../blocks/card/__like-container/card__like-container.css);
+@import url(../blocks/card/__like-count/card__like-count.css);
 @import url(../blocks/card/__image/card__image.css);
 @import url(../blocks/card/__title/card__title.css);
 @import url(../blocks/card/__like-button/card__like-button.css);
@@ -51,7 +53,9 @@
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__container/_single-input/popup__container_single-input.css);
+@import url(../blocks/popup/__container/_no-input/popup__container_no-input.css);
 @import url(../blocks/popup/__header/popup__header.css);
+@import url(../blocks/popup/__header/_confirm/popup__header_confirm.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__exit-button/popup__exit-button.css);
 @import url(../blocks/popup/_background/popup_background_dark.css);
@@ -67,6 +71,7 @@
 @import url(../blocks/form/__input-field/_type/form__input-field_type_error.css);
 @import url(../blocks/form/__submit/form__submit.css);
 @import url(../blocks/form/__submit/_inactive/form__submit_inactive.css);
+@import url(../blocks/form/__submit/_confirm/form__submit_confirm.css);
 @import url(../blocks/form/__input-error/form__input-error.css);
 @import url(../blocks/form/__input-error/_active/form__input-error_active.css);
 
