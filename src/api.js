@@ -82,3 +82,6 @@ export const changeAvatar = (body) => {
     .then(onResponse)
     .catch((err) => console.log(err));
 };
+
+
+

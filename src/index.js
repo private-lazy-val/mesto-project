@@ -8,19 +8,25 @@ import { enableValidation } from "./components/validate.js";
 import { createCard } from "./components/card.js";
 import { resetFormErrors } from "./components/utils.js";
 
-import { getUser, getInitialCards, editProfile, addCard } from "./api.js";
+import {
+  getUser,
+  getInitialCards,
+  editProfile,
+  addCard,
+  changeAvatar
+} from "./api.js";
 
 const cardsContainer = document.querySelector(".cards");
 let userId;
 
-function adaptCardToCardObj(card, userId) {
+function adaptCardToCardObj(card) {
   return {
     name: card.name,
     url: card.link,
-    likes: card.likes.length,
+    likes: card.likes,
     ownerId: card.owner._id,
     cardId: card._id,
-    userId: userId,
+    ownerId: card.owner._id,
   };
 }
 
@@ -86,10 +92,14 @@ function createImagePopup() {
 }
 
 function handleEditProfile(updatedData) {
-  editProfile(updatedData).then((userData) => {
+  return editProfile(updatedData).then((userData) => {
     document.querySelector(".profile__name").textContent = userData.name;
     document.querySelector(".profile__occupation").textContent = userData.about;
   });
+}
+
+function formLoading(isLoading, btn, defaultTxt, loadingTxt="Сохранение...") {
+  btn.textContent = isLoading ? loadingTxt : defaultTxt;
 }
 
 function createProfileEditPopup() {
@@ -104,10 +114,12 @@ function createProfileEditPopup() {
     ".form__input-field_el_occupation"
   );
   const submitButton = popup.querySelector(".form__submit");
+  const defaultSubmitButtonText = submitButton.textContent;
 
   openButton.addEventListener("click", function () {
-    openPopup(popup);
+    formLoading(false, submitButton, defaultSubmitButtonText);
     resetForm(form, formObj);
+    openPopup(popup);
     formName.value = name.textContent;
     formOccupation.value = occupation.textContent;
     submitButton.disabled = true;
@@ -115,14 +127,15 @@ function createProfileEditPopup() {
   });
 
   form.addEventListener("submit", function (e) {
+    formLoading(true, submitButton, defaultSubmitButtonText)
     e.preventDefault();
-    closePopup(popup);
     const name = profileEditPopup.formName.value;
     const about = profileEditPopup.formOccupation.value;
     handleEditProfile({
       name: name,
       about: about,
     });
+    closePopup(popup);
   });
 
   return {
@@ -158,19 +171,22 @@ function createAddCardPopup() {
   const url = popup.querySelector(".form__input-field_el_url");
   const submitButton = popup.querySelector(".form__submit");
 
+  const defaultSubmitButtonText = submitButton.textContent;
+
   addButton.addEventListener("click", function () {
-    openPopup(popup);
+    formLoading(false, submitButton, defaultSubmitButtonText);
     resetForm(form, formObj);
     submitButton.disabled = true;
     submitButton.classList.add("form__submit_inactive");
+    openPopup(popup);
   });
 
   form.addEventListener("submit", function (e) {
+    formLoading(true, submitButton, defaultSubmitButtonText);
     e.preventDefault();
     const cardObj = { name: name.value, link: url.value };
     handleAddCard(cardObj);
     closePopup(popup);
-    form.reset();
   });
 
   return {
@@ -195,12 +211,15 @@ function createAvatarPopup() {
   const exitButton = popup.querySelector(".popup__exit-button");
   const submitButton = popup.querySelector(".form__submit");
 
+  const defaultSubmitButtonText = submitButton.textContent;
+
   pencilButton.addEventListener("click", function () {
-    openPopup(popup);
+    formLoading(false, submitButton, defaultSubmitButtonText);
     resetForm(form, formObj);
     url.value = img.src;
     submitButton.disabled = true;
     submitButton.classList.add("form__submit_inactive");
+    openPopup(popup);
   });
 
   // Change background AND show overlay on hover over avatar
@@ -214,9 +233,12 @@ function createAvatarPopup() {
     overlay.style.backgroundColor = "initial";
   });
 
-  form.addEventListener("submit", function () {
-    closePopup(popup);
+  form.addEventListener("submit", function (e) {
+    formLoading(true, submitButton, defaultSubmitButtonText);
+    e.preventDefault();
+    changeAvatar({ avatar: url.value });
     img.src = url.value;
+    closePopup(popup);
   });
 
   return {
