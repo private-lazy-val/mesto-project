@@ -13,7 +13,7 @@ import {
   getInitialCards,
   editProfile,
   addCard,
-  changeAvatar
+  changeAvatar,
 } from "./api.js";
 
 const cardsContainer = document.querySelector(".cards");
@@ -32,24 +32,29 @@ function adaptCardToCardObj(card) {
 
 // Render user
 function handleGetUser() {
-  getUser().then((userData) => {
-    document.querySelector(".profile__occupation").textContent = userData.about;
-    document.querySelector(".profile__name").textContent = userData.name;
-    document.querySelector(".profile__avatar").src = userData.avatar;
-    userId = userData._id;
-  });
+  getUser()
+    .then((userData) => {
+      document.querySelector(".profile__occupation").textContent =
+        userData.about;
+      document.querySelector(".profile__name").textContent = userData.name;
+      document.querySelector(".profile__avatar").src = userData.avatar;
+      userId = userData._id;
+    })
+    .catch((err) => console.log(err));
 }
 
 handleGetUser();
 
 // Render initial card after page loading
 function handleGetInitialCards() {
-  getInitialCards().then((cards) =>
-    cards
-      .map(adaptCardToCardObj)
-      .map((cardObj) => createCard(cardObj, imagePopup, userId))
-      .forEach((cardElement) => cardsContainer.append(cardElement))
-  );
+  getInitialCards()
+    .then((cards) =>
+      cards
+        .map(adaptCardToCardObj)
+        .map((cardObj) => createCard(cardObj, imagePopup, userId))
+        .forEach((cardElement) => cardsContainer.append(cardElement))
+    )
+    .catch((err) => console.log(err));
 }
 
 handleGetInitialCards();
@@ -92,13 +97,16 @@ function createImagePopup() {
 }
 
 function handleEditProfile(updatedData) {
-  return editProfile(updatedData).then((userData) => {
-    document.querySelector(".profile__name").textContent = userData.name;
-    document.querySelector(".profile__occupation").textContent = userData.about;
-  });
+  return editProfile(updatedData)
+    .then((userData) => {
+      document.querySelector(".profile__name").textContent = userData.name;
+      document.querySelector(".profile__occupation").textContent =
+        userData.about;
+    })
+    .catch((err) => console.log(err));
 }
 
-function formLoading(isLoading, btn, defaultTxt, loadingTxt="Сохранение...") {
+function formLoading(isLoading, btn, defaultTxt, loadingTxt = "Сохранение...") {
   btn.textContent = isLoading ? loadingTxt : defaultTxt;
 }
 
@@ -127,7 +135,7 @@ function createProfileEditPopup() {
   });
 
   form.addEventListener("submit", function (e) {
-    formLoading(true, submitButton, defaultSubmitButtonText)
+    formLoading(true, submitButton, defaultSubmitButtonText);
     e.preventDefault();
     const name = profileEditPopup.formName.value;
     const about = profileEditPopup.formOccupation.value;
@@ -152,14 +160,16 @@ function createProfileEditPopup() {
 }
 
 function handleAddCard(cardObj) {
-  addCard(cardObj).then((card) => {
-    const cardElement = createCard(
-      adaptCardToCardObj(card, userId),
-      imagePopup,
-      userId
-    );
-    cardsContainer.prepend(cardElement);
-  });
+  addCard(cardObj)
+    .then((card) => {
+      const cardElement = createCard(
+        adaptCardToCardObj(card, userId),
+        imagePopup,
+        userId
+      );
+      cardsContainer.prepend(cardElement);
+    })
+    .catch((err) => console.log(err));
 }
 
 function createAddCardPopup() {

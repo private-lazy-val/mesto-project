@@ -43,17 +43,21 @@ function createCard(cardObj, imagePopup, userId) {
   likeButton.addEventListener("click", function (evt) {
     const isLiked = evt.target.classList.contains("card__like-button_active");
     if (isLiked) {
-      removeLike(cardId).then((updatedCard) => {
-        evt.target.classList.remove("card__like-button_active");
-        // Update the like count
-        likeCountElement.textContent = updatedCard.likes.length;
-      });
+      removeLike(cardId)
+        .then((updatedCard) => {
+          evt.target.classList.remove("card__like-button_active");
+          // Update the like count
+          likeCountElement.textContent = updatedCard.likes.length;
+        })
+        .catch((err) => console.log(err));
     } else {
-      addLike(cardId).then((updatedCard) => {
-        evt.target.classList.add("card__like-button_active");
-        // Update the like count
-        likeCountElement.textContent = updatedCard.likes.length;
-      });
+      addLike(cardId)
+        .then((updatedCard) => {
+          evt.target.classList.add("card__like-button_active");
+          // Update the like count
+          likeCountElement.textContent = updatedCard.likes.length;
+        })
+        .catch((err) => console.log(err));
     }
   });
   // Check if user and the card owner are the same people
