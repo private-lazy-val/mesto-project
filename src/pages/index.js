@@ -83,13 +83,10 @@ function createImagePopup() {
 }
 
 function handleEditProfile(updatedData) {
-  return editProfile(updatedData)
-    .then((userData) => {
-      document.querySelector(".profile__name").textContent = userData.name;
-      document.querySelector(".profile__occupation").textContent =
-        userData.about;
-    })
-    .catch((err) => console.log(err));
+  return editProfile(updatedData).then((userData) => {
+    document.querySelector(".profile__name").textContent = userData.name;
+    document.querySelector(".profile__occupation").textContent = userData.about;
+  });
 }
 
 function formLoading(isLoading, btn, defaultTxt, loadingTxt = "Сохранение...") {
@@ -111,7 +108,7 @@ function createProfileEditPopup() {
   const defaultSubmitButtonText = submitButton.textContent;
 
   openButton.addEventListener("click", function () {
-    formLoading(false, submitButton, defaultSubmitButtonText)
+    formLoading(false, submitButton, defaultSubmitButtonText);
     disableButton(submitButton, formObj);
     resetForm(form, formObj);
     openPopup(popup);
@@ -120,7 +117,6 @@ function createProfileEditPopup() {
   });
 
   form.addEventListener("submit", function (e) {
-    formLoading(true, submitButton, defaultSubmitButtonText);
     e.preventDefault();
     const name = profileEditPopup.formName.value;
     const about = profileEditPopup.formOccupation.value;
@@ -129,7 +125,8 @@ function createProfileEditPopup() {
       about: about,
     })
       .then(() => closePopup(popup))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(`Ошибка обновления профиля: ${err}`))
+      .finally(() => formLoading(true, submitButton, defaultSubmitButtonText));
   });
 
   return {
@@ -146,17 +143,15 @@ function createProfileEditPopup() {
 }
 
 function handleAddCard(cardObj) {
-  return addCard(cardObj)
-    .then((card) => {
-      const cardElement = createCard(
-        adaptCardToCardObj(card, userId),
-        imagePopup,
-        confirmationPopup,
-        userId
-      );
-      cardsContainer.prepend(cardElement);
-    })
-    .catch((err) => console.log(err));
+  return addCard(cardObj).then((card) => {
+    const cardElement = createCard(
+      adaptCardToCardObj(card, userId),
+      imagePopup,
+      confirmationPopup,
+      userId
+    );
+    cardsContainer.prepend(cardElement);
+  });
 }
 
 function createAddCardPopup() {
@@ -171,19 +166,19 @@ function createAddCardPopup() {
   const defaultSubmitButtonText = submitButton.textContent;
 
   addButton.addEventListener("click", function () {
-    formLoading(false, submitButton, defaultSubmitButtonText)
+    formLoading(false, submitButton, defaultSubmitButtonText);
     disableButton(submitButton, formObj);
     resetForm(form, formObj);
     openPopup(popup);
   });
 
   form.addEventListener("submit", function (e) {
-    formLoading(true, submitButton, defaultSubmitButtonText);
     e.preventDefault();
     const cardObj = { name: name.value, link: url.value };
     handleAddCard(cardObj)
       .then(() => closePopup(popup))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(`Ошибка добавление карточки: ${err}`))
+      .finally(() => formLoading(true, submitButton, defaultSubmitButtonText));
   });
 
   return {
@@ -211,7 +206,7 @@ function createAvatarPopup() {
   const defaultSubmitButtonText = submitButton.textContent;
 
   pencilButton.addEventListener("click", function () {
-    formLoading(false, submitButton, defaultSubmitButtonText)
+    formLoading(false, submitButton, defaultSubmitButtonText);
     disableButton(submitButton, formObj);
     resetForm(form, formObj);
     url.value = img.src;
@@ -230,14 +225,14 @@ function createAvatarPopup() {
   });
 
   form.addEventListener("submit", function (e) {
-    formLoading(true, submitButton, defaultSubmitButtonText);
     e.preventDefault();
     changeAvatar({ avatar: url.value })
       .then(() => {
         closePopup(popup);
         img.src = url.value;
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(`Ошибка обновления аватара: ${err}`))
+      .finally(() => formLoading(true, submitButton, defaultSubmitButtonText));
   });
 
   return {
@@ -266,7 +261,7 @@ function createConfirmationPopup() {
         cardElement.remove();
         closePopup(confirmationPopup);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(`Ошибка удаления карточки: ${err}`));
   }
 
   function open(cardId, cardElement) {
