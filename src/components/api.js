@@ -15,7 +15,6 @@ export const getUser = () => {
     headers: config.headers,
   })
     .then(onResponse)
-    .catch((err) => console.log(err));
 };
 
 export const getInitialCards = () => {
@@ -23,7 +22,6 @@ export const getInitialCards = () => {
     headers: config.headers,
   })
     .then(onResponse)
-    .catch((err) => console.log(err));
 };
 
 export const editProfile = (body) => {
@@ -33,7 +31,6 @@ export const editProfile = (body) => {
     body: JSON.stringify(body),
   })
     .then(onResponse)
-    .catch((err) => console.log(err));
 };
 
 export const addCard = (body) => {
@@ -43,7 +40,6 @@ export const addCard = (body) => {
     body: JSON.stringify(body),
   })
     .then(onResponse)
-    .catch((err) => console.log(err));
 };
 
 export const deleteCard = (cardId) => {
@@ -52,7 +48,6 @@ export const deleteCard = (cardId) => {
     headers: config.headers,
   })
     .then(onResponse)
-    .catch((err) => console.log(err));
 };
 
 export const addLike = (cardId) => {
@@ -61,7 +56,6 @@ export const addLike = (cardId) => {
     headers: config.headers,
   })
     .then(onResponse)
-    .catch((err) => console.log(err));
 };
 
 export const removeLike = (cardId) => {
@@ -70,7 +64,6 @@ export const removeLike = (cardId) => {
     headers: config.headers,
   })
     .then(onResponse)
-    .catch((err) => console.log(err));
 };
 
 export const changeAvatar = (body) => {
@@ -80,7 +73,6 @@ export const changeAvatar = (body) => {
     body: JSON.stringify(body),
   })
     .then(onResponse)
-    .catch((err) => console.log(err));
 };
 
 

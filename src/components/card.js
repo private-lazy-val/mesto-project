@@ -1,31 +1,15 @@
-import { deleteCard, addLike, removeLike } from "../api.js";
-import {
-  openPopup,
-  closePopup,
-  addPopupEventListeners,
-} from "../components/modals.js";
+import { addLike, removeLike } from "./api.js";
 const cardTemplate = document
   .querySelector("#card")
   .content.querySelector(".card");
 
 // Create and return new card
-function createCard(cardObj, imagePopup, userId) {
+function createCard(cardObj, imagePopup, confirmationPopup, userId) {
   const { name, url, likes, ownerId, cardId } = cardObj; //const name = cardObj.name; const url = cardObj.url; ...
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageElement = cardElement.querySelector(".card__image");
   const likeButton = cardElement.querySelector(".card__like-button");
   const likeCountElement = cardElement.querySelector(".card__like-count");
-
-  const confirmationPopup = document.querySelector(".confirmation-popup");
-  const submitButton = confirmationPopup.querySelector(".form__submit");
-  const exitButton = confirmationPopup.querySelector(".popup__exit-button");
-
-  const confirmationPopupObj = {
-    popup: confirmationPopup,
-    exitButton: exitButton,
-  };
-
-  addPopupEventListeners(confirmationPopupObj);
 
   cardImageElement.src = url;
   cardImageElement.alt = `Фотография места ${name}`;
@@ -64,14 +48,9 @@ function createCard(cardObj, imagePopup, userId) {
   const deleteButton = cardElement.querySelector(".card__delete-button");
   if (ownerId === userId) {
     deleteButton.style.display = "block";
-    deleteButton.addEventListener("click", function () {
-      openPopup(confirmationPopup);
-    });
-    submitButton.addEventListener("click", function () {
-      deleteCard(cardId);
-      cardElement.remove();
-      closePopup(confirmationPopup);
-    });
+    deleteButton.addEventListener("click", () =>
+      confirmationPopup.open(cardId, cardElement)
+    );
   } else {
     deleteButton.style.display = "none";
   }
@@ -79,6 +58,7 @@ function createCard(cardObj, imagePopup, userId) {
   cardImageElement.addEventListener("click", function () {
     imagePopup.open(url, name);
   });
+
   return cardElement;
 }
 

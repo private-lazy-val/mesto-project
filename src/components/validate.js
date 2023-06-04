@@ -7,16 +7,21 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
-// Toggle submit button
+// Toggle submit button depending on the form state
 const toggleButtonState = (inputList, buttonElement, formObj) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.disabled = true;
-    buttonElement.classList.add(formObj.inactiveButtonClass);
+    disableButton(buttonElement, formObj);
   } else {
     buttonElement.disabled = false;
     buttonElement.classList.remove(formObj.inactiveButtonClass);
   }
 };
+
+// Toggle submit button on popup opening
+const disableButton = (buttonElement, formObj) => {
+  buttonElement.disabled = true;
+  buttonElement.classList.add(formObj.inactiveButtonClass);
+}
 
 // Check validity of the input field
 const checkInputValidity = (formElement, inputElement, formObj) => {
@@ -64,4 +69,4 @@ const enableValidation = (formObj) => {
   });
 };
 
-export { enableValidation };
+export { enableValidation, disableButton };

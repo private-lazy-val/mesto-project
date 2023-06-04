@@ -1,20 +1,20 @@
-import "./pages/index.css";
+import "./index.css";
 import {
   openPopup,
   closePopup,
   addPopupEventListeners,
-} from "./components/modals.js";
-import { enableValidation } from "./components/validate.js";
-import { createCard } from "./components/card.js";
-import { resetFormErrors } from "./components/utils.js";
-
+} from "../components/modals.js";
+import { enableValidation, disableButton } from "../components/validate.js";
+import { createCard } from "../components/card.js";
+import { resetFormErrors } from "../components/utils.js";
 import {
   getUser,
   getInitialCards,
   editProfile,
   addCard,
   changeAvatar,
-} from "./api.js";
+  deleteCard,
+} from "../components/api.js";
 
 const cardsContainer = document.querySelector(".cards");
 let userId;
@@ -26,38 +26,24 @@ function adaptCardToCardObj(card) {
     likes: card.likes,
     ownerId: card.owner._id,
     cardId: card._id,
-    ownerId: card.owner._id,
   };
 }
 
-// Render user
-function handleGetUser() {
-  getUser()
-    .then((userData) => {
-      document.querySelector(".profile__occupation").textContent =
-        userData.about;
-      document.querySelector(".profile__name").textContent = userData.name;
-      document.querySelector(".profile__avatar").src = userData.avatar;
-      userId = userData._id;
-    })
-    .catch((err) => console.log(err));
-}
+Promise.all([getUser(), getInitialCards()])
+  .then(([userData, cards]) => {
+    document.querySelector(".profile__occupation").textContent = userData.about;
+    document.querySelector(".profile__name").textContent = userData.name;
+    document.querySelector(".profile__avatar").src = userData.avatar;
+    userId = userData._id;
 
-handleGetUser();
-
-// Render initial card after page loading
-function handleGetInitialCards() {
-  getInitialCards()
-    .then((cards) =>
-      cards
-        .map(adaptCardToCardObj)
-        .map((cardObj) => createCard(cardObj, imagePopup, userId))
-        .forEach((cardElement) => cardsContainer.append(cardElement))
-    )
-    .catch((err) => console.log(err));
-}
-
-handleGetInitialCards();
+    cards
+      .map(adaptCardToCardObj)
+      .map((cardObj) =>
+        createCard(cardObj, imagePopup, confirmationPopup, userId)
+      )
+      .forEach((cardElement) => cardsContainer.append(cardElement));
+  })
+  .catch((err) => console.log(err));
 
 const formObj = {
   formSelector: ".form",
@@ -125,13 +111,12 @@ function createProfileEditPopup() {
   const defaultSubmitButtonText = submitButton.textContent;
 
   openButton.addEventListener("click", function () {
-    formLoading(false, submitButton, defaultSubmitButtonText);
+    formLoading(false, submitButton, defaultSubmitButtonText)
+    disableButton(submitButton, formObj);
     resetForm(form, formObj);
     openPopup(popup);
     formName.value = name.textContent;
     formOccupation.value = occupation.textContent;
-    submitButton.disabled = true;
-    submitButton.classList.add("form__submit_inactive");
   });
 
   form.addEventListener("submit", function (e) {
@@ -142,8 +127,9 @@ function createProfileEditPopup() {
     handleEditProfile({
       name: name,
       about: about,
-    });
-    closePopup(popup);
+    })
+      .then(() => closePopup(popup))
+      .catch((err) => console.log(err));
   });
 
   return {
@@ -160,11 +146,12 @@ function createProfileEditPopup() {
 }
 
 function handleAddCard(cardObj) {
-  addCard(cardObj)
+  return addCard(cardObj)
     .then((card) => {
       const cardElement = createCard(
         adaptCardToCardObj(card, userId),
         imagePopup,
+        confirmationPopup,
         userId
       );
       cardsContainer.prepend(cardElement);
@@ -184,10 +171,9 @@ function createAddCardPopup() {
   const defaultSubmitButtonText = submitButton.textContent;
 
   addButton.addEventListener("click", function () {
-    formLoading(false, submitButton, defaultSubmitButtonText);
+    formLoading(false, submitButton, defaultSubmitButtonText)
+    disableButton(submitButton, formObj);
     resetForm(form, formObj);
-    submitButton.disabled = true;
-    submitButton.classList.add("form__submit_inactive");
     openPopup(popup);
   });
 
@@ -195,8 +181,9 @@ function createAddCardPopup() {
     formLoading(true, submitButton, defaultSubmitButtonText);
     e.preventDefault();
     const cardObj = { name: name.value, link: url.value };
-    handleAddCard(cardObj);
-    closePopup(popup);
+    handleAddCard(cardObj)
+      .then(() => closePopup(popup))
+      .catch((err) => console.log(err));
   });
 
   return {
@@ -224,11 +211,10 @@ function createAvatarPopup() {
   const defaultSubmitButtonText = submitButton.textContent;
 
   pencilButton.addEventListener("click", function () {
-    formLoading(false, submitButton, defaultSubmitButtonText);
+    formLoading(false, submitButton, defaultSubmitButtonText)
+    disableButton(submitButton, formObj);
     resetForm(form, formObj);
     url.value = img.src;
-    submitButton.disabled = true;
-    submitButton.classList.add("form__submit_inactive");
     openPopup(popup);
   });
 
@@ -246,9 +232,12 @@ function createAvatarPopup() {
   form.addEventListener("submit", function (e) {
     formLoading(true, submitButton, defaultSubmitButtonText);
     e.preventDefault();
-    changeAvatar({ avatar: url.value });
-    img.src = url.value;
-    closePopup(popup);
+    changeAvatar({ avatar: url.value })
+      .then(() => {
+        closePopup(popup);
+        img.src = url.value;
+      })
+      .catch((err) => console.log(err));
   });
 
   return {
@@ -264,10 +253,45 @@ function createAvatarPopup() {
   };
 }
 
+let currentSubmitHandler;
+
+function createConfirmationPopup() {
+  const confirmationPopup = document.querySelector(".confirmation-popup");
+  const submitButton = confirmationPopup.querySelector(".form__submit");
+  const exitButton = confirmationPopup.querySelector(".popup__exit-button");
+
+  function deleteCardAndRemoveElement(cardId, cardElement, confirmationPopup) {
+    deleteCard(cardId)
+      .then(() => {
+        cardElement.remove();
+        closePopup(confirmationPopup);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function open(cardId, cardElement) {
+    if (currentSubmitHandler) {
+      submitButton.removeEventListener("click", currentSubmitHandler);
+    }
+    currentSubmitHandler = () =>
+      deleteCardAndRemoveElement(cardId, cardElement, confirmationPopup);
+    submitButton.addEventListener("click", currentSubmitHandler);
+    openPopup(confirmationPopup);
+  }
+
+  return {
+    popup: confirmationPopup,
+    exitButton: exitButton,
+    submitButton: submitButton,
+    open: open,
+  };
+}
+
 const avatarPopup = createAvatarPopup();
 const profileEditPopup = createProfileEditPopup();
 const imagePopup = createImagePopup();
-const cardAddPopup = createAddCardPopup(cardsContainer, imagePopup);
+const confirmationPopup = createConfirmationPopup();
+const cardAddPopup = createAddCardPopup();
 
 // Close popup if
 // "X" icon is clicked
@@ -276,6 +300,7 @@ addPopupEventListeners(profileEditPopup);
 addPopupEventListeners(cardAddPopup);
 addPopupEventListeners(imagePopup);
 addPopupEventListeners(avatarPopup);
+addPopupEventListeners(confirmationPopup);
 
 // Validate forms
 enableValidation(formObj);
