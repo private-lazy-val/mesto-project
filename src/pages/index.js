@@ -7,14 +7,15 @@ import {
 import { enableValidation, disableButton } from "../components/validate.js";
 import { createCard } from "../components/card.js";
 import { resetFormErrors } from "../components/utils.js";
-import {
-  getUser,
-  getInitialCards,
-  editProfile,
-  addCard,
-  changeAvatar,
-  deleteCard,
-} from "../components/api.js";
+import Api from "../components/api.js";
+
+const api = new Api({
+  baseUrl: 'https://nomoreparties.co/v1/cohort-42',
+  headers: {
+    authorization: 'c56e30dc-2883-4270-a59e-b2f7bae969c6',
+    'Content-Type': 'application/json'
+  }
+});
 
 const cardsContainer = document.querySelector(".cards");
 let userId;
