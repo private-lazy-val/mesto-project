@@ -30,11 +30,7 @@
         <!-- Profile -->
         <section class="profile">
           <div class="profile__edit-avatar-container">
-            <img
-              class="profile__avatar"
-              src=""
-              alt="Аватар пользователя."
-            />
+            <img class="profile__avatar" src="" alt="Аватар пользователя." />
             <div class="profile__overlay">
               <button type="button" class="button profile__pencil"></button>
             </div>
@@ -168,7 +164,14 @@
         <div class="popup__container popup__container_no-input">
           <h2 class="popup__header popup__header_confirm">Вы уверены?</h2>
           <button type="button" class="button popup__exit-button"></button>
-          <button type="submit" class="button form__submit form__submit_confirm">Да</button>
+          <form action="/" class="form" name="confirm-delete-card" novalidate>
+            <button
+              type="submit"
+              class="button form__submit form__submit_confirm"
+            >
+              Да
+            </button>
+          </form>
         </div>
       </div>
 
