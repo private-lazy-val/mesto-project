@@ -64,15 +64,17 @@
           <h2 class="popup__header">Обновить аватар</h2>
           <button type="button" class="button popup__exit-button"></button>
           <form action="/" class="form" name="edit-avatar-form" novalidate>
-            <input
-              type="url"
-              class="form__input-field form__input-field_el_avatar"
-              id="url-input"
-              name="avatar-url"
-              placeholder="Ссылка на картинку"
-              required
-            />
-            <span class="url-input-error form__input-error"></span>
+            <label class="form__field">
+              <input
+                type="url"
+                class="form__input-field form__input-field_el_avatar"
+                id="url-input"
+                name="avatar-url"
+                placeholder="Ссылка на картинку"
+                required
+              />
+              <span class="url-input-error form__input-error"></span>
+            </label>
             <button type="submit" class="button form__submit">Сохранить</button>
           </form>
         </div>
@@ -84,32 +86,36 @@
           <h2 class="popup__header">Редактировать профиль</h2>
           <button type="button" class="button popup__exit-button"></button>
           <form action="/" class="form" name="edit-profile-form" novalidate>
-            <input
-              type="text"
-              class="form__input-field form__input-field_el_name"
-              id="name-input"
-              name="user-name"
-              placeholder="Имя"
-              minlength="2"
-              maxlength="40"
-              pattern="[A-Za-z\u0400-\u04FF\s\-]+"
-              data-error-message="Разрешены латинские, кириллические буквы, знаки дефиса и пробелы."
-              required
-            />
-            <span class="name-input-error form__input-error"></span>
-            <input
-              type="text"
-              class="form__input-field form__input-field_el_occupation"
-              id="occupation-input"
-              name="user-occupation"
-              placeholder="Описание"
-              minlength="2"
-              maxlength="200"
-              pattern="[A-Za-z\u0400-\u04FF\s\-]+"
-              data-error-message="Разрешены латинские, кириллические буквы, знаки дефиса и пробелы."
-              required
-            />
-            <span class="occupation-input-error form__input-error"></span>
+            <label class="form__field">
+              <input
+                type="text"
+                class="form__input-field form__input-field_el_name"
+                id="name-input"
+                name="user-name"
+                placeholder="Имя"
+                minlength="2"
+                maxlength="40"
+                pattern="[A-Za-z\u0400-\u04FF\s\-]+"
+                data-error-message="Разрешены латинские, кириллические буквы, знаки дефиса и пробелы."
+                required
+              />
+              <span class="name-input-error form__input-error"></span>
+            </label>
+            <label class="form__field">
+              <input
+                type="text"
+                class="form__input-field form__input-field_el_occupation"
+                id="occupation-input"
+                name="user-occupation"
+                placeholder="Описание"
+                minlength="2"
+                maxlength="200"
+                pattern="[A-Za-z\u0400-\u04FF\s\-]+"
+                data-error-message="Разрешены латинские, кириллические буквы, знаки дефиса и пробелы."
+                required
+              />
+              <span class="occupation-input-error form__input-error"></span>
+            </label>
             <button type="submit" class="button form__submit">Сохранить</button>
           </form>
         </div>
@@ -121,28 +127,33 @@
           <h2 class="popup__header">Новое место</h2>
           <button type="button" class="button popup__exit-button"></button>
           <form action="/" class="form" name="add-new-place" novalidate>
-            <input
-              type="text"
-              class="form__input-field form__input-field_el_title"
-              id="title-input"
-              name="place-name"
-              placeholder="Название"
-              minlength="2"
-              maxlength="30"
-              pattern="[A-Za-z\u0400-\u04FF\s\-]+"
-              data-error-message="Разрешены латинские, кириллические буквы, знаки дефиса и пробелы."
-              required
-            />
-            <span class="title-input-error form__input-error"></span>
-            <input
-              type="url"
-              class="form__input-field form__input-field_el_url"
-              id="url-input"
-              name="place-url"
-              placeholder="Ссылка на картинку"
-              required
-            />
-            <span class="url-input-error form__input-error"></span>
+            <label class="form__field">
+              <input
+                type="text"
+                class="form__input-field form__input-field_el_title"
+                id="title-input"
+                name="place-name"
+                placeholder="Название"
+                minlength="2"
+                maxlength="30"
+                pattern="[A-Za-z\u0400-\u04FF\s\-]+"
+                data-error-message="Разрешены латинские, кириллические буквы, знаки дефиса и пробелы."
+                required
+              />
+              <span class="title-input-error form__input-error"></span>
+            </label>
+
+            <label class="form__field">
+              <input
+                type="url"
+                class="form__input-field form__input-field_el_url"
+                id="url-input"
+                name="place-url"
+                placeholder="Ссылка на картинку"
+                required
+              />
+              <span class="url-input-error form__input-error"></span>
+            </label>
             <button type="submit" class="button form__submit">Создать</button>
           </form>
         </div>

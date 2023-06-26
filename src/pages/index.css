@@ -62,6 +62,7 @@
 
 /* Forms */
 @import url(../blocks/form/form.css);
+@import url(../blocks/form/form__field/form__field.css);
 @import url(../blocks/form/__input-field/form__input-field.css);
 @import url(../blocks/form/__input-field/_el/form__input-field_el_name.css);
 @import url(../blocks/form/__input-field/_el/form__input-field_el_url.css);
