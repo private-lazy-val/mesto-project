@@ -1,5 +1,6 @@
 import "./index.css";
-import { PopupWithImage, PopupWithForm } from "../components/popup.js";
+import PopupWithImage from "../components/popupWithImage";
+import PopupWithForm from "../components/popupWithForm.js";
 import FormValidator from "../components/validate.js";
 import Card from "../components/card.js";
 import Api from "../components/api.js";
@@ -17,7 +18,7 @@ const api = new Api({
 let userId;
 let section;
 
-const formObj = {
+const formSelectors = {
   formSelector: ".form",
   inputSelector: ".form__input-field",
   submitButtonSelector: ".form__submit",
@@ -25,10 +26,6 @@ const formObj = {
   inputErrorClass: "form__input-field_type_error",
   activeErrorClass: "form__input-error_active",
 };
-
-function handleLike(isLiked, cardId) {
-  return isLiked ? api.removeLike(cardId) : api.addLike(cardId);
-}
 
 const userInfo = new UserInfo(
   { nameSelector: ".profile__name", aboutSelector: ".profile__occupation" },
@@ -60,11 +57,13 @@ const cardRenderer = (cardData) => {
         cardId: cardId,
         cardElement: cardElement,
       }),
-    userId,
-    handleLike
+    (isLiked, cardId) =>
+      isLiked ? api.removeLike(cardId) : api.addLike(cardId),
+    "#card"
   );
-  return card.generateCard();
-}
+
+  return card.generateCard(userId);
+};
 
 api
   .getInitialCards()
@@ -72,7 +71,7 @@ api
     section = new Section(
       {
         items: cardsData,
-        renderer: cardRenderer
+        renderer: cardRenderer,
       },
       ".cards"
     );
@@ -80,14 +79,13 @@ api
   })
   .catch((err) => console.log(err));
 
+// Profile edit popup
 function createProfileEditPopup() {
   function submitFormHandler(inputValues, closePopup, finalizeSubmission) {
-    const name = inputValues["user-name"];
-    const about = inputValues["user-occupation"];
     userInfo
       .setUserInfo({
-        name: name,
-        about: about,
+        name: inputValues["user-name"],
+        about: inputValues["user-occupation"],
       })
       .then(() => closePopup())
       .catch((err) => console.log(`Ошибка обновления профиля: ${err}`))
@@ -97,13 +95,11 @@ function createProfileEditPopup() {
   const popup = new PopupWithForm(
     ".edit-profile",
     ".popup__exit-button",
-    formObj,
+    formSelectors,
     submitFormHandler
   );
 
   const openButton = document.querySelector(".profile__edit-button");
-  // const name = document.querySelector(".profile__name");
-  // const occupation = document.querySelector(".profile__occupation");
   const formName = popup.popupElement.querySelector(
     ".form__input-field_el_name"
   );
@@ -124,39 +120,9 @@ function createProfileEditPopup() {
   return popup;
 }
 
-function handleAddCard(cardObj) {
-  return api.addCard(cardObj).then((cardData) => {
-    const card = cardRenderer(cardData)
-    section.addItem(card, true);
-  });
-}
+const profileEditPopup = createProfileEditPopup();
 
-function createAddCardPopup() {
-  const popup = new PopupWithForm(
-    ".add-place",
-    ".popup__exit-button",
-    formObj,
-    (inputValues, closePopup, finalizeSubmission) => {
-      const name = inputValues["place-name"];
-      const link = inputValues["place-url"];
-      handleAddCard({ name: name, link: link })
-        .then(() => closePopup())
-        .catch((err) => console.log(`Ошибка добавление карточки: ${err}`))
-        .finally(() => finalizeSubmission(true));
-    }
-  );
-
-  const addButton = document.querySelector(".profile__add-button");
-
-  addButton.addEventListener("click", function () {
-    popup.formLoading(false);
-    cardAddFormValidator.disableButton();
-    popup.open();
-  });
-
-  return popup;
-}
-
+// Avatar popup
 function createAvatarPopup() {
   function submitFormHandler(inputValues, closePopup, finalizeSubmission) {
     const url = inputValues["avatar-url"];
@@ -173,7 +139,7 @@ function createAvatarPopup() {
   const popup = new PopupWithForm(
     ".edit-avatar",
     ".popup__exit-button",
-    formObj,
+    formSelectors,
     submitFormHandler
   );
 
@@ -204,14 +170,15 @@ function createAvatarPopup() {
   return popup;
 }
 
+const avatarPopup = createAvatarPopup();
+
+// Delete confirmation popup
 function createConfirmationPopup() {
   function submitFormHandler(inputValues, closePopup, finalizeSubmission) {
-    const cardId = inputValues["cardId"];
-    const cardElement = inputValues["cardElement"];
     api
-      .deleteCard(cardId)
+      .deleteCard(inputValues["cardId"])
       .then(() => {
-        cardElement.remove();
+        inputValues["cardElement"].remove();
         closePopup();
       })
       .catch((err) => console.log(`Ошибка удаления карточки: ${err}`));
@@ -220,16 +187,50 @@ function createConfirmationPopup() {
   const popup = new PopupWithForm(
     ".confirmation-popup",
     ".popup__exit-button",
-    formObj,
+    formSelectors,
     submitFormHandler
   );
 
   return popup;
 }
 
-const avatarPopup = createAvatarPopup();
-const profileEditPopup = createProfileEditPopup();
 const confirmationPopup = createConfirmationPopup();
+
+  // Add card popup
+function createAddCardPopup() {
+
+  function handleAddCard(cardObj) {
+    return api.addCard(cardObj).then((cardData) => {
+      const card = cardRenderer(cardData);
+      section.addItem(card, true);
+    });
+  }
+
+  const popup = new PopupWithForm(
+    ".add-place",
+    ".popup__exit-button",
+    formSelectors,
+    (inputValues, closePopup, finalizeSubmission) => {
+      const name = inputValues["place-name"];
+      const link = inputValues["place-url"];
+      handleAddCard({ name: name, link: link })
+        .then(() => closePopup())
+        .catch((err) => console.log(`Ошибка добавление карточки: ${err}`))
+        .finally(() => finalizeSubmission(true));
+    }
+  );
+
+  const addButton = document.querySelector(".profile__add-button");
+
+  addButton.addEventListener("click", function () {
+    popup.formLoading(false);
+    cardAddFormValidator.disableButton();
+    popup.open();
+  });
+
+  return popup;
+}
+
 const cardAddPopup = createAddCardPopup();
 
 const imagePopup = new PopupWithImage(
@@ -242,6 +243,7 @@ const imagePopup = new PopupWithImage(
 // Close popup if
 // "X" icon is clicked
 // OR click outside of popup
+// OR click on ESC button
 profileEditPopup.setEventListeners();
 cardAddPopup.setEventListeners();
 imagePopup.setEventListeners();
@@ -250,13 +252,16 @@ confirmationPopup.setEventListeners();
 
 // Validate forms
 const profileEditFormValidator = new FormValidator(
-  formObj,
+  formSelectors,
   profileEditPopup.form
 );
 profileEditFormValidator.enableValidation();
 
-const cardAddFormValidator = new FormValidator(formObj, cardAddPopup.form);
+const cardAddFormValidator = new FormValidator(
+  formSelectors,
+  cardAddPopup.form
+);
 cardAddFormValidator.enableValidation();
 
-const avatarFormValidator = new FormValidator(formObj, avatarPopup.form);
+const avatarFormValidator = new FormValidator(formSelectors, avatarPopup.form);
 avatarFormValidator.enableValidation();
