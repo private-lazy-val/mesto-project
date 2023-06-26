@@ -9,6 +9,7 @@ The Mesto project was created as part of a web development learning program. The
    - [Figma](#figma)
    - [Images](#images)
    - [Hosting](#hosting)
+   - [Contributors](#contributors)
 2. [Technologies](#technologies)
 
 ## Overview
@@ -32,6 +33,10 @@ All images used in this project have been optimized for faster loading and bette
 Mesto project is hosted on GitHub Pages.
 
 - [https://private-lazy-val.github.io/mesto-project/](https://private-lazy-val.github.io/mesto-project/)
+
+### Contributors
+
+We've collaborated on this project with [dinosaurivan](https://github.com/dinosaurivan/mesto-project)
 
 ## Technologies
 

@@ -1,31 +1,28 @@
-import Api from "./api.js";
-
-const api = new Api({
-  baseUrl: "https://nomoreparties.co/v1/plus-cohort-25",
-  headers: {
-    authorization: "fbf2685b-0a91-4bb8-81bb-36697ce1b928",
-    "Content-Type": "application/json",
-  },
-});
-
 export default class Card {
-  constructor(cardObj, handleCardClick, handleDeleteCard, userId, handleLike) {
+  constructor(
+    cardObj,
+    handleCardClick,
+    handleDeleteCard,
+    handleLike,
+    cardTemplateSelector
+  ) {
     this.cardObj = cardObj;
     this._handleCardClick = handleCardClick;
     this._handleDeleteCard = handleDeleteCard;
-    this.userId = userId;
-    this.cardTemplate = document
-      .querySelector("#card")
-      .content.querySelector(".card");
     this._handleLike = handleLike;
+    this.cardTemplate = document
+      .querySelector(cardTemplateSelector)
+      .content.querySelector(".card");
+    this.cardElement = this.cardTemplate.cloneNode(true);
+    this.likeButton = this.cardElement.querySelector(".card__like-button");
+    this.deleteButton = this.cardElement.querySelector(".card__delete-button");
+    this.cardImageElement = this.cardElement.querySelector(".card__image");
+    this.likeCountElement = this.cardElement.querySelector(".card__like-count");
   }
 
   _setEventListeners() {
-    const likeButton = this.cardElement.querySelector(".card__like-button");
-    const deleteButton = this.cardElement.querySelector(".card__delete-button");
-
-    likeButton.addEventListener("click", () => this._handleLikeClick());
-    deleteButton.addEventListener("click", () => {
+    this.likeButton.addEventListener("click", () => this._handleLikeClick());
+    this.deleteButton.addEventListener("click", () => {
       this._handleDeleteCard(this.cardObj.cardId, this.cardElement);
     });
     this.cardImageElement.addEventListener("click", () =>
@@ -37,22 +34,28 @@ export default class Card {
     const isLiked = this.likeButton.classList.contains(
       "card__like-button_active"
     );
-    const likePromise = this._handleLike(isLiked, this.cardObj.cardId);
-    likePromise
-      .then((updatedCard) => {
+    // Optimistically update the UI
+    this.likeButton.classList.toggle("card__like-button_active");
+    const newLikeCount = isLiked
+      ? parseInt(this.likeCountElement.textContent, 10) - 1
+      : parseInt(this.likeCountElement.textContent, 10) + 1;
+    this.likeCountElement.textContent = newLikeCount;
+
+    // Send the request to the server
+
+    // console.log(isLiked)
+    this._handleLike(isLiked, this.cardObj.cardId)
+      // If server response is successful, UI is already updated
+      // So we don't need to use then
+      .catch((err) => {
+        // If there's an error, rollback the UI update
+        console.log(err);
         this.likeButton.classList.toggle("card__like-button_active");
-        // Update the like count
-        this.likeCountElement.textContent = updatedCard.likes.length;
-      })
-      .catch((err) => console.log(err));
+        this.likeCountElement.textContent = this.cardObj.likes.length;
+      });
   }
 
-  generateCard() {
-    this.cardElement = this.cardTemplate.cloneNode(true);
-    this.cardImageElement = this.cardElement.querySelector(".card__image");
-    this.likeButton = this.cardElement.querySelector(".card__like-button");
-    this.likeCountElement = this.cardElement.querySelector(".card__like-count");
-
+  generateCard(userId) {
     this.cardImageElement.src = this.cardObj.url;
     this.cardImageElement.alt = `Фотография места ${this.cardObj.name}`;
     this.cardElement.querySelector(".card__title").textContent =
@@ -60,7 +63,7 @@ export default class Card {
 
     // Check if current user has liked the card already
     const isLikedByUser = this.cardObj.likes.some(
-      (like) => like._id === this.userId
+      (like) => like._id === userId
     );
 
     if (isLikedByUser) {
@@ -71,11 +74,10 @@ export default class Card {
     this.likeCountElement.textContent = this.cardObj.likes.length;
 
     // Check if user and the card owner are the same people
-    const deleteButton = this.cardElement.querySelector(".card__delete-button");
-    if (this.cardObj.ownerId === this.userId) {
-      deleteButton.style.display = "block";
+    if (this.cardObj.ownerId === userId) {
+      this.deleteButton.style.display = "block";
     } else {
-      deleteButton.style.display = "none";
+      this.deleteButton.style.display = "none";
     }
 
     this._setEventListeners();

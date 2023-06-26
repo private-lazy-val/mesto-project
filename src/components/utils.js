@@ -1,27 +1,27 @@
 // Add error to input field
-const showInputError = (formElement, inputElement, errorMessage, formObj) => {
+const showInputError = (formElement, inputElement, errorMessage, formSelectors) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add(formObj.inputErrorClass);
-  errorElement.classList.add(formObj.activeErrorClass);
+  inputElement.classList.add(formSelectors.inputErrorClass);
+  errorElement.classList.add(formSelectors.activeErrorClass);
   errorElement.textContent = errorMessage;
 };
 
 // Remove error from input field
-const hideInputError = (formElement, inputElement, formObj) => {
+const hideInputError = (formElement, inputElement, formSelectors) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove(formObj.inputErrorClass);
-  errorElement.classList.remove(formObj.activeErrorClass);
+  inputElement.classList.remove(formSelectors.inputErrorClass);
+  errorElement.classList.remove(formSelectors.activeErrorClass);
   errorElement.textContent = "";
 };
 
 // Reset errors in a form
-function resetFormErrors(formElement, formObj) {
+function resetFormErrors(formElement, formSelectors) {
   if (formElement) {
     const inputList = Array.from(
       formElement.querySelectorAll(".form__input-field")
     );
     inputList.forEach((inputElement) => {
-      hideInputError(formElement, inputElement, formObj);
+      hideInputError(formElement, inputElement, formSelectors);
     });
   }
 }
