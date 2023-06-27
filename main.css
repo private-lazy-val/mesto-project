@@ -39,6 +39,7 @@
 .popup__exit-button{background-color:transparent;background-image:url(ad98de32e342afafa118.svg);height:32px;position:absolute;right:-40px;top:-40px;width:32px}@media only screen and (max-width:695px){.popup__exit-button{background-image:url(b793e07c3f4c19e26c11.svg);height:20px;right:0;top:-36px;width:20px}}
 .popup_background_dark{background:rgba(0,0,0,.9)}
 
+.form__field{display:flex;flex-direction:column;position:relative}
 .form__input-field{border:0;border-bottom:1px solid #c4c4c4;border-radius:2px;box-sizing:border-box;font-size:14px;font-weight:400;line-height:1.85;outline:transparent;padding:0;position:relative;width:100%}
 
 .form__input-field_el_url{margin:29px 0 0}@media only screen and (max-width:695px){.form__input-field_el_url{margin:30px 0 0}}
@@ -49,7 +50,7 @@
 .form__submit{background-color:#000;border:0;border-radius:2px;color:#fff;font-size:18px;font-weight:400;line-height:1;margin-top:48px;outline:transparent;padding:15px 0 16px;width:100%}.form__submit:hover{opacity:.8}@media only screen and (max-width:695px){.form__submit{font-size:14px;line-height:17px;margin-top:45px;padding:15px 0}}
 .form__submit_inactive{background-color:transparent;border:1px solid #c4c4c4;color:#c4c4c4;cursor:default}.form__submit_inactive:hover{opacity:1}
 .form__submit_confirm{margin-top:13px}
-.form__input-error{color:red;font-size:12px;line-height:1.25;max-width:358px;opacity:1;position:absolute;transition:.3s}@media only screen and (max-width:695px){.form__input-error{max-width:238px}}
+.form__input-error{color:red;font-size:12px;left:0;line-height:1.25;max-width:358px;opacity:1;position:absolute;top:calc(100% - 1px);transition:.3s}@media only screen and (max-width:695px){.form__input-error{max-width:238px}}
 .form__input-error_active{opacity:1}
 .image-full-screen__container{align-items:center;display:flex;justify-content:center;position:relative}
 .image-full-screen__figure{margin:0}
