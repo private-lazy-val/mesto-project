@@ -2,12 +2,19 @@ import Popup from "./popup.js";
 import { resetFormErrors } from "./utils.js";
 
 export default class PopupWithForm extends Popup {
-  constructor(popupSelector, exitButtonSelector, formSelectors, submitFormHandler) {
+  constructor(
+    popupSelector,
+    exitButtonSelector,
+    formSelectors,
+    submitFormHandler
+  ) {
     super(popupSelector, exitButtonSelector);
 
     this.formSelectors = formSelectors;
     this.form = this.popupElement.querySelector(formSelectors.formSelector);
-    this.submitButton = this.form.querySelector(formSelectors.submitButtonSelector);
+    this.submitButton = this.form.querySelector(
+      formSelectors.submitButtonSelector
+    );
     this._submitFormHandler = submitFormHandler;
     this.defaultSubmitButtonText = this.submitButton.textContent;
     this._context = {};
@@ -23,7 +30,7 @@ export default class PopupWithForm extends Popup {
     return values;
   }
 
-  formLoading(isLoading, loadingTxt = "Сохранение...") {
+  setFormLoading(isLoading, loadingTxt = "Сохранение...") {
     this.submitButton.textContent = isLoading
       ? loadingTxt
       : this.defaultSubmitButtonText;
@@ -37,9 +44,8 @@ export default class PopupWithForm extends Popup {
       self._submitFormHandler(
         { ...self._context, ...self._getInputValues() },
         () => self.close(),
-        (isLoading) => self.formLoading(isLoading)
+        (isLoading) => self.setFormLoading(isLoading)
       );
-      self.formLoading(false, self.defaultSubmitButtonText);
     });
   }
 

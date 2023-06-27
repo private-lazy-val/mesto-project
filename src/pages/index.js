@@ -81,15 +81,18 @@ api
 
 // Profile edit popup
 function createProfileEditPopup() {
-  function submitFormHandler(inputValues, closePopup, finalizeSubmission) {
+  function submitFormHandler(inputValues, closePopup, setFormLoading) {
+    setFormLoading(true);
     userInfo
       .setUserInfo({
         name: inputValues["user-name"],
         about: inputValues["user-occupation"],
       })
       .then(() => closePopup())
-      .catch((err) => console.log(`Ошибка обновления профиля: ${err}`))
-      .finally(() => finalizeSubmission(true));
+      .catch((err) => {
+        console.log(`Ошибка обновления профиля: ${err}`);
+      })
+      .finally(() => setFormLoading(false));
   }
 
   const popup = new PopupWithForm(
@@ -100,8 +103,8 @@ function createProfileEditPopup() {
   );
 
   const openButton = document.querySelector(".profile__edit-button");
-  const userName = document.querySelector('.profile__name');
-  const userOccupation = document.querySelector('.profile__occupation');
+  const userName = document.querySelector(".profile__name");
+  const userOccupation = document.querySelector(".profile__occupation");
   const formName = popup.popupElement.querySelector(
     ".form__input-field_el_name"
   );
@@ -110,12 +113,12 @@ function createProfileEditPopup() {
   );
 
   openButton.addEventListener("click", function () {
-      popup.formLoading(false);
-      profileEditFormValidator.disableButton();
-      popup.open();
-      formName.value = userName.textContent;
-      formOccupation.value = userOccupation.textContent;
-    });
+    popup.setFormLoading(false);
+    profileEditFormValidator.disableButton();
+    popup.open();
+    formName.value = userName.textContent;
+    formOccupation.value = userOccupation.textContent;
+  });
 
   return popup;
 }
@@ -124,8 +127,9 @@ const profileEditPopup = createProfileEditPopup();
 
 // Avatar popup
 function createAvatarPopup() {
-  function submitFormHandler(inputValues, closePopup, finalizeSubmission) {
+  function submitFormHandler(inputValues, closePopup, setFormLoading) {
     const url = inputValues["avatar-url"];
+    setFormLoading(true);
     api
       .changeAvatar({ avatar: url })
       .then(() => {
@@ -133,7 +137,7 @@ function createAvatarPopup() {
         img.src = url;
       })
       .catch((err) => console.log(`Ошибка обновления аватара: ${err}`))
-      .finally(() => finalizeSubmission(true));
+      .finally(() => setFormLoading(false));
   }
 
   const popup = new PopupWithForm(
@@ -150,7 +154,7 @@ function createAvatarPopup() {
   const url = popup.popupElement.querySelector(".form__input-field_el_avatar");
 
   pencilButton.addEventListener("click", function () {
-    popup.formLoading(false);
+    popup.setFormLoading(false);
     avatarFormValidator.disableButton();
     url.value = img.src;
     popup.open();
@@ -174,7 +178,7 @@ const avatarPopup = createAvatarPopup();
 
 // Delete confirmation popup
 function createConfirmationPopup() {
-  function submitFormHandler(inputValues, closePopup, finalizeSubmission) {
+  function submitFormHandler(inputValues, closePopup, setFormLoading) {
     api
       .deleteCard(inputValues["cardId"])
       .then(() => {
@@ -196,9 +200,8 @@ function createConfirmationPopup() {
 
 const confirmationPopup = createConfirmationPopup();
 
-  // Add card popup
+// Add card popup
 function createAddCardPopup() {
-
   function handleAddCard(cardObj) {
     return api.addCard(cardObj).then((cardData) => {
       const card = cardRenderer(cardData);
@@ -210,20 +213,23 @@ function createAddCardPopup() {
     ".add-place",
     ".popup__exit-button",
     formSelectors,
-    (inputValues, closePopup, finalizeSubmission) => {
+    (inputValues, closePopup, setFormLoading) => {
       const name = inputValues["place-name"];
       const link = inputValues["place-url"];
+      setFormLoading(true);
       handleAddCard({ name: name, link: link })
         .then(() => closePopup())
-        .catch((err) => console.log(`Ошибка добавление карточки: ${err}`))
-        .finally(() => finalizeSubmission(true));
+        .catch((err) => {
+          console.log(`Ошибка добавление карточки: ${err}`);
+        })
+        .finally(() => setFormLoading(false));
     }
   );
 
   const addButton = document.querySelector(".profile__add-button");
 
   addButton.addEventListener("click", function () {
-    popup.formLoading(false);
+    popup.setFormLoading(false);
     cardAddFormValidator.disableButton();
     popup.open();
   });
