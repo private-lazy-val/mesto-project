@@ -100,6 +100,8 @@ function createProfileEditPopup() {
   );
 
   const openButton = document.querySelector(".profile__edit-button");
+  const userName = document.querySelector('.profile__name');
+  const userOccupation = document.querySelector('.profile__occupation');
   const formName = popup.popupElement.querySelector(
     ".form__input-field_el_name"
   );
@@ -108,14 +110,12 @@ function createProfileEditPopup() {
   );
 
   openButton.addEventListener("click", function () {
-    userInfo.getUserInfo().then((userData) => {
       popup.formLoading(false);
       profileEditFormValidator.disableButton();
       popup.open();
-      formName.value = userData.name;
-      formOccupation.value = userData.about;
+      formName.value = userName.textContent;
+      formOccupation.value = userOccupation.textContent;
     });
-  });
 
   return popup;
 }
