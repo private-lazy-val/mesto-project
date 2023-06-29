@@ -1,5 +1,3 @@
-import { showInputError, hideInputError } from "./utils.js";
-
 export default class FormValidator {
   constructor(formSelectors, formElement) {
     this.formSelectors = formSelectors;
@@ -25,7 +23,9 @@ export default class FormValidator {
       this.disableButton();
     } else {
       this.buttonElement.disabled = false;
-      this.buttonElement.classList.remove(this.formSelectors.inactiveButtonClass);
+      this.buttonElement.classList.remove(
+        this.formSelectors.inactiveButtonClass
+      );
     }
   }
 
@@ -43,25 +43,46 @@ export default class FormValidator {
       inputElement.setCustomValidity("");
     }
     if (!inputElement.validity.valid) {
-      showInputError(
-        this.formElement,
+      this.showInputError(
         inputElement,
-        inputElement.validationMessage,
-        this.formSelectors
+        inputElement.validationMessage
       );
     } else {
-      hideInputError(this.formElement, inputElement, this.formSelectors);
+      this.hideInputError(inputElement);
     }
   }
 
   // Set listeners for input fields
   _setEventListeners() {
-    this._toggleButtonState();
     this.inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
         this._toggleButtonState();
       });
+    });
+  }
+
+  // Add error to input field
+  showInputError(inputElement, errorMessage) {
+    const errorElement = this.formElement.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.add(this.formSelectors.inputErrorClass);
+    errorElement.classList.add(this.formSelectors.activeErrorClass);
+    errorElement.textContent = errorMessage;
+  }
+
+  // Remove error from input field
+  hideInputError(inputElement) {
+    const errorElement = this.formElement.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.remove(this.formSelectors.inputErrorClass);
+    errorElement.classList.remove(this.formSelectors.activeErrorClass);
+    errorElement.textContent = "";
+  }
+
+  // Reset errors in a form
+  resetFormErrors() {
+    this._toggleButtonState();
+    this.inputList.forEach((inputElement) => {
+      this.hideInputError(inputElement, this.formSelectors);
     });
   }
 

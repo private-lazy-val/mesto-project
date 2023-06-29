@@ -1,27 +1,24 @@
 export default class UserInfo {
-  constructor(
-    { nameSelector, aboutSelector },
-    handleGetUser,
-    handleSetUser
-  ) {
-    this.nameSelector = nameSelector;
-    this.aboutSelector = aboutSelector;
-    this._handleGetUser = handleGetUser;
-    this._handleSetUser = handleSetUser;
+  constructor({ nameSelector, jobSelector, avatarSelector }) {
+    this.nameElement = document.querySelector(nameSelector);
+    this.jobElement = document.querySelector(jobSelector);
+    this.avatarElement = document.querySelector(avatarSelector);
+    this.userId = null;
   }
 
   getUserInfo() {
-    return this._handleGetUser();
-  }
+    return {
+      name: this.nameElement.textContent,
+      about: this.jobElement.textContent,
+      avatar: this.avatarElement.src,
+      _id: this.userId,  // _id is needed when creating new cards in `index.js`
+    };
+  };
 
-  setUserInfo(newUserInfo) {
-    return this._handleSetUser(newUserInfo)
-      .then((userData) => {
-        document.querySelector(this.nameSelector).textContent = userData.name;
-        document.querySelector(this.aboutSelector).textContent = userData.about;
-      })
-      .catch((err) =>
-        console.log(`Ошибка обновления информации пользователя: ${err}`)
-      );
+  setUserInfo({ name, about, avatar, _id }) {
+    this.nameElement.textContent = name;
+    this.jobElement.textContent = about;
+    this.avatarElement.src = avatar;
+    this.userId = _id;
   }
 }

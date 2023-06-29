@@ -18,6 +18,8 @@ export default class Card {
     this.deleteButton = this.cardElement.querySelector(".card__delete-button");
     this.cardImageElement = this.cardElement.querySelector(".card__image");
     this.likeCountElement = this.cardElement.querySelector(".card__like-count");
+    this.cardLikeSelector = "card__like-button_active";
+    this.cardTitleElement = this.cardElement.querySelector(".card__title");
   }
 
   _setEventListeners() {
@@ -31,34 +33,21 @@ export default class Card {
   }
 
   _handleLikeClick() {
-    const isLiked = this.likeButton.classList.contains(
-      "card__like-button_active"
-    );
-    // Optimistically update the UI
-    this.likeButton.classList.toggle("card__like-button_active");
-    const newLikeCount = isLiked
-      ? parseInt(this.likeCountElement.textContent, 10) - 1
-      : parseInt(this.likeCountElement.textContent, 10) + 1;
-    this.likeCountElement.textContent = newLikeCount;
-
-    // Send the request to the server
-
-    // console.log(isLiked)
-    this._handleLike(isLiked, this.cardObj.cardId)
-      // If server response is successful, UI is already updated
-      // So we don't need to use then
-      .catch((err) => {
-        // If there's an error, rollback the UI update
-        console.log(err);
-        this.likeButton.classList.toggle("card__like-button_active");
-        this.likeCountElement.textContent = this.cardObj.likes.length;
-      });
+    const isLiked = this.likeButton.classList.contains(this.cardLikeSelector);
+    const likePromise = this._handleLike(isLiked, this.cardObj.cardId);
+    likePromise
+      .then((updatedCard) => {
+        this.likeButton.classList.toggle(this.cardLikeSelector);
+        // Update the like count
+        this.likeCountElement.textContent = updatedCard.likes.length;
+      })
+      .catch((err) => console.log(err));
   }
 
   generateCard(userId) {
     this.cardImageElement.src = this.cardObj.url;
     this.cardImageElement.alt = `Фотография места ${this.cardObj.name}`;
-    this.cardElement.querySelector(".card__title").textContent =
+    this.cardTitleElement.textContent =
       this.cardObj.name;
 
     // Check if current user has liked the card already
@@ -67,7 +56,7 @@ export default class Card {
     );
 
     if (isLikedByUser) {
-      this.likeButton.classList.add("card__like-button_active");
+      this.likeButton.classList.add(this.cardLikeSelector);
     }
 
     // Set the likes count

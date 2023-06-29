@@ -1,8 +1,13 @@
-import Popup from "./popup.js";
+import Popup from "./Popup.js";
 
 export default class PopupWithImage extends Popup {
-  constructor(popupSelector, exitButtonSelector, imgFullScreenSelector, figCaptionSelector) {
-    super(popupSelector, exitButtonSelector);
+  constructor(
+    popupElement,
+    exitButtonSelector,
+    imgFullScreenSelector,
+    figCaptionSelector
+  ) {
+    super(popupElement, exitButtonSelector);
 
     this.imgFullScreen = this.popupElement.querySelector(imgFullScreenSelector);
     this.figCaption = this.popupElement.querySelector(figCaptionSelector);

@@ -9,59 +9,65 @@ export default class Api {
   }
 
   getUser() {
-    return fetch(`${this.baseUrl}/users/me`, {
+    return this._request(`${this.baseUrl}/users/me`, {
       headers: this.headers,
-    }).then(this.onResponse);
+    });
   }
 
   getInitialCards() {
-    return fetch(`${this.baseUrl}/cards`, {
+    return this._request(`${this.baseUrl}/cards`, {
       headers: this.headers,
-    }).then(this.onResponse);
+    });
   }
 
   editProfile = (body) => {
-    return fetch(`${this.baseUrl}/users/me`, {
+    return this._request(`${this.baseUrl}/users/me`, {
       method: "PATCH",
       headers: this.headers,
       body: JSON.stringify(body),
-    }).then(this.onResponse);
+    });
   };
 
   addCard(body) {
-    return fetch(`${this.baseUrl}/cards`, {
+    return this._request(`${this.baseUrl}/cards`, {
       method: "POST",
       headers: this.headers,
       body: JSON.stringify(body),
-    }).then(this.onResponse);
+    });
   }
 
   deleteCard(cardId) {
-    return fetch(`${this.baseUrl}/cards/${cardId}`, {
+    return this._request(`${this.baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this.headers,
-    }).then(this.onResponse);
+    });
   }
 
   addLike(cardId) {
-    return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
+    return this._request(`${this.baseUrl}/cards/likes/${cardId}`, {
       method: "PUT",
       headers: this.headers,
-    }).then(this.onResponse);
+    });
   }
 
   removeLike(cardId) {
-    return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
+    return this._request(`${this.baseUrl}/cards/likes/${cardId}`, {
       method: "DELETE",
       headers: this.headers,
-    }).then(this.onResponse);
+    });
   }
 
   changeAvatar(body) {
-    return fetch(`${this.baseUrl}/users/me/avatar`, {
+    let url = `${this.baseUrl}/users/me/avatar`;
+    let options = {
       method: "PATCH",
       headers: this.headers,
       body: JSON.stringify(body),
-    }).then(this.onResponse);
+    };
+    return this._request(url, options);
+  }
+
+  _request(url, options) {
+    return fetch(url, options).then(this.onResponse);
   }
 }

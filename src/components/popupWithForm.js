@@ -1,36 +1,35 @@
-import Popup from "./popup.js";
-import { resetFormErrors } from "./utils.js";
+import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
   constructor(
-    popupSelector,
+    popupElement,
     exitButtonSelector,
     formSelectors,
     submitFormHandler
   ) {
-    super(popupSelector, exitButtonSelector);
+    super(popupElement, exitButtonSelector);
 
     this.formSelectors = formSelectors;
-    this.form = this.popupElement.querySelector(formSelectors.formSelector);
-    this.submitButton = this.form.querySelector(
+    this.formElement = this.popupElement.querySelector(formSelectors.formSelector);
+    this.submitButton = this.formElement.querySelector(
       formSelectors.submitButtonSelector
     );
     this._submitFormHandler = submitFormHandler;
     this.defaultSubmitButtonText = this.submitButton.textContent;
     this._context = {};
+    this.formInputs = this.formElement?.querySelectorAll("input") ?? [];
   }
 
   _getInputValues() {
-    let values = {};
-    const inputs = this.form?.querySelectorAll("input") ?? [];
-    inputs.forEach((input) => {
+    const values = {};
+    this.formInputs.forEach((input) => {
       values[input.name] = input.value;
     });
 
     return values;
   }
 
-  setFormLoading(isLoading, loadingTxt = "Сохранение...") {
+  setFormLoading(isLoading, loadingTxt) {
     this.submitButton.textContent = isLoading
       ? loadingTxt
       : this.defaultSubmitButtonText;
@@ -38,24 +37,30 @@ export default class PopupWithForm extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    let self = this;
-    this.form.addEventListener("submit", function (e) {
+
+    this.formElement.addEventListener("submit", (e) => {
       e.preventDefault();
-      self._submitFormHandler(
-        { ...self._context, ...self._getInputValues() },
-        () => self.close(),
-        (isLoading) => self.setFormLoading(isLoading)
+      this._submitFormHandler(
+        { ...this._context, ...this._getInputValues() },
+        this
       );
     });
   }
 
-  reset() {
-    this.form.reset();
-    resetFormErrors(this.form, this.formSelectors);
+  // Pre-fill input values on opening in index.js
+   setInputValues(data) {
+    this.formInputs.forEach((input) => {
+
+      input.value = data[input.name];
+    });
+  }
+
+  getFormName() {
+    return this.formElement.getAttribute('name');
   }
 
   open(context) {
-    this.reset();
+    this.formElement.reset();
     super.open();
     this._context = context;
   }
