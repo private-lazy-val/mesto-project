@@ -112,10 +112,7 @@ function createProfileEditPopup() {
           name: name,
           about: about,
         })
-        .then(() => {
-          const userData = userInfo.getUserInfo();
-          userData.name = name;
-          userData.about = about;
+        .then((userData) => {
           userInfo.setUserInfo(userData);
         });
     }
@@ -151,11 +148,9 @@ function createAvatarPopup() {
   function submitFormHandler(inputValues, popup) {
     function makeRequest() {
       const url = inputValues["avatar-url"];
-      return api.changeAvatar({ avatar: url }).then(() => {
-        const userData = userInfo.getUserInfo();
-        userData.avatar = url;
+      return api.changeAvatar({ avatar: url })
+      .then((userData) => {
         userInfo.setUserInfo(userData);
-        avatarObj.img.src = url;
       });
     }
     handleSubmit(makeRequest, popup);
@@ -174,7 +169,6 @@ function createAvatarPopup() {
     avatarFormValidator.resetFormErrors();
     avatarFormValidator.disableButton();
     popup.open();
-    popup.setInputValues({ "avatar-url": avatarObj.img.src });
   });
 
   // Change background AND show overlay on hover over avatar
@@ -197,7 +191,8 @@ const avatarPopup = createAvatarPopup();
 function createConfirmationPopup() {
   function submitFormHandler(inputValues, popup) {
     function makeRequest() {
-      return api.deleteCard(inputValues["cardId"]).then(() => {
+      return api.deleteCard(inputValues["cardId"])
+      .then(() => {
         inputValues["cardElement"].remove();
       });
     }
