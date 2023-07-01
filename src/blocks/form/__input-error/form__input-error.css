@@ -6,6 +6,8 @@
   position: absolute;
   transition: 0.3s;
   max-width: 358px;
+  top: calc(100% + -1px);
+  left: 0;
 }
 
 @media only screen and (max-width: 695px) {
