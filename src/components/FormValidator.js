@@ -10,7 +10,7 @@ export default class FormValidator {
     );
   }
 
-  // Сheck whether an array has invalid inputs
+  // Check whether an array has invalid inputs
   _hasInvalidInput() {
     return this.inputList.some((inputElement) => {
       return !inputElement.validity.valid;
