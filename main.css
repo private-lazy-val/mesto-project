@@ -15,7 +15,7 @@
 .profile__occupation{font-size:18px;font-weight:400;line-height:1.22;margin:16px 0 0 30px;max-width:295px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media only screen and (max-width:695px){.profile__occupation{font-size:14px;line-height:17px;margin:7px auto 35px;max-width:246px;text-align:center}}
 .profile__edit-button{background-image:url(a1892ea72cb87c8fc3aa.svg);height:24px;width:24px}@media only screen and (max-width:695px){.profile__edit-button{background-image:url(2f7be95ab48bbff7d88c.svg);height:18px;width:18px}}@-moz-document url-prefix(){.profile__edit-button{display:inline-flex}}
 .profile__add-button{background-image:url(6f41966c71dd7895857f.svg);height:50px;margin-left:auto;margin-right:0;width:150px}@media only screen and (max-width:695px){.profile__add-button{background-image:url(6f86ece55e54220c5485.svg);margin:0 auto;width:282px}}
-.profile__overlay{align-items:center;background-color:transparent;cursor:pointer;display:flex;inset:0;justify-content:center;position:absolute;transition:background-color .4s linear}
+.profile__overlay{align-items:center;background-color:transparent;display:flex;inset:0;justify-content:center;position:absolute;transition:background-color .4s linear}
 .button{background-color:transparent;border:0;cursor:pointer;transition:opacity .4s linear}.button:hover{opacity:.6}
 .cards{-moz-column-gap:17px;column-gap:17px;display:grid;grid-template-columns:repeat(auto-fit,282px);justify-content:center;margin:0 auto;max-width:880px;row-gap:20px}
 .card{background-color:#fff;border-radius:10px;max-height:361px;max-width:282px;position:relative}
