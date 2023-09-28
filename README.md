@@ -1,7 +1,5 @@
 # Mesto Project
 
-The Mesto project was created as part of a web development learning program. The project aims to demonstrate proficiency in HTML, CSS, and JavaScript.
-
 ## Table of Contents
 
 1. [Overview](#overview)
