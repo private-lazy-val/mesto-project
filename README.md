@@ -2,8 +2,7 @@
 
 ## Table of Contents
 
-- [About the Project](#overview)
-- [Intro](#intro)
+- [About the Project](#about-the-project)
 - [Figma](#figma)
 - [Hosting](#hosting)
 - [Contributors](#contributors)
