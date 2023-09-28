@@ -2,32 +2,29 @@
 
 ## Table of Contents
 
-1. [Overview](#overview)
-   - [Intro](#intro)
-   - [Figma](#figma)
-   - [Hosting](#hosting)
-   - [Contributors](#contributors)
-2. [Technologies](#technologies)
+- [About the Project](#overview)
+- [Intro](#intro)
+- [Figma](#figma)
+- [Hosting](#hosting)
+- [Contributors](#contributors)
+- [Technologies](#technologies)
 
-## Overview
 
-### Intro
+## About the Project
 
 The Mesto project is a responsive web application built with HTML, CSS, and JavaScript. The application showcases interesting places in Russia through a series of cards. Users can edit their profile, add new cards, and view card images in full-screen mode.
 
-### Figma
+## Figma
 
-The design prototype for this project was created using Figma:
+- [Prototypes](https://www.figma.com/file/xni8mSiI7OqdTyzTD1wQ6L/JavaScript.-Sprint-4?node-id=28212-2&t=x7dkQJZtB5fHShUH-0)
 
-- [Figma prototypes](https://www.figma.com/file/xni8mSiI7OqdTyzTD1wQ6L/JavaScript.-Sprint-4?node-id=28212-2&t=x7dkQJZtB5fHShUH-0)
-
-### Hosting
+## Hosting
 
 The project is hosted on GitHub Pages:
 
 - [Mesto Project](https://private-lazy-val.github.io/mesto-project/)
 
-### Contributors
+## Contributors
 
 The project was created in collaboration with [dinosaurivan](https://github.com/dinosaurivan/mesto-project)
 
